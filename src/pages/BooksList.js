@@ -2,8 +2,13 @@ import BookCard from "../components/BookCard"
 import "./BooksList.css"
 import Masonry from "react-masonry-css"
 import Backdrop from "../components/Backdrop"
+import PopupForm from "../components/PopupForm"
+import { useState, useEffect } from "react"
 
 const BookList = () => {
+    const [btnNewBook, setBtnNewBook] = useState(false)
+    const [allBooks, setAllBooks] = useState([])
+
     const books = [
         {
             title: "JoJo's Bizarre Adventure",
@@ -42,6 +47,23 @@ const BookList = () => {
         },
     ]
 
+    useEffect(() => {
+        setAllBooks(books.sort((a, b) => (a["title"] < b["title"]) ? -1 : 1));
+    }, [])
+
+    const sortBook = (by) => {
+        console.log(by, typeof (by));
+        setAllBooks(books.sort((a, b) => (a[by] < b[by]) ? -1 : 1));
+        console.log(allBooks);
+    }
+
+    const searchBook = (term) => {
+        setAllBooks(books.filter((book) => {
+            const tTitle = book.title.toLowerCase();
+            return tTitle.includes(term.toLowerCase());
+        }))
+    }
+
     const breakpoints = {
         default: 5,
         1100: 3,
@@ -53,8 +75,8 @@ const BookList = () => {
             <section className="booksList-actions">
                 <div className="booksList-actionsLeft">
                     <label htmlFor="sort">Sort By</label>
-                    <select name="sort" id="sort">
-                        <option value="name">Name</option>
+                    <select name="sort" id="sort" onChange={(e) => sortBook(e.target.value)}>
+                        <option value="title">Title</option>
                         <option value="author">Author</option>
                         <option value="copise">Copise</option>
                     </select>
@@ -62,25 +84,25 @@ const BookList = () => {
                 <div className="booksList-actionsMid">
                     <div className="search-book">
                         <svg xmlns="http://www.w3.org/2000/svg" style={{ width: "25px", color: "#3DA5D9" }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
-                        <input type="text" />
+                        <input type="text" onChange={(e) => searchBook(e.target.value)} />
                     </div>
                 </div>
                 <div className="booksList-actionsRight">
-                    <button>ADD NEW BOOK</button>
+                    <button onClick={() => setBtnNewBook(true)}>ADD NEW BOOK</button>
                 </div>
             </section>
             <section>
                 <Masonry breakpointCols={breakpoints} className="my-masonry-grid" columnClassName="my-masonry-grid_column" >
-                    {books.map((book, k) => (
+                    {allBooks.map((book, k) => (
                         <div key={k}>
                             <BookCard title={book.title} img={book.img} author={book.author} publisher={book.publisher} genres={book.genres} />
                         </div>
                     ))}
                 </Masonry>
             </section>
-            <Backdrop />
+            {btnNewBook && <><Backdrop closeForm={setBtnNewBook} /><PopupForm closeForm={setBtnNewBook} addBook={setAllBooks} /></>}
         </main>
     )
 }

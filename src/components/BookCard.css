@@ -16,6 +16,7 @@
 
 .bookCard img{
     width: 100%;
+    object-fit: cover;
 }
 
 .bookCard h1{

@@ -56,25 +56,23 @@
     box-shadow: 0px 1px 5px gray;
 }
 
-.booksList-container{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 20px;
+.booksList-actionsRight button:active{
+    background-color: #389e0d;
 }
 
 .my-masonry-grid{
   display: -webkit-box;
   display:-ms-flexbox;
   display: flex;
-  margin-left: -30px;
+  margin-left: -15px;
   width: auto;
 }
 
 .my-masonry-grid_column{
-  padding-left:30px;
+  padding-left: 15px;
   background-clip: padding-box;
 }
 
 .my-masonry-grid_column > div{
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
