@@ -1,0 +1,37 @@
+.bookCard{
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.bookCard:hover{
+    background: #3DA5D9;
+    color: white;
+    box-shadow: 0px 1px 10px gray;
+}
+
+.bookCard img{
+    width: 100%;
+}
+
+.bookCard h1{
+    font-size: 18px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.bookCard span{
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.book-genre{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    gap: 5px;
+}
