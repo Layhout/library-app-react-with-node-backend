@@ -1,0 +1,68 @@
+{
+    "books": [
+        {
+            "id": 1,
+            "title": "JoJo's Bizarre Adventure",
+            "img": "https://i.pinimg.com/originals/4a/de/69/4ade697d6c1476320f645a0ba38f9ecd.jpg",
+            "author": "Hirohiko Araki",
+            "publisher": "Viz Media",
+            "genres": [
+                "Adventure",
+                "Fantasy",
+                "Supernatural"
+            ],
+            "copise": 1
+        },
+        {
+            "id": 2,
+            "title": "Chainsaw man",
+            "img": "https://kbimages1-a.akamaihd.net/9b90e481-4b79-47e1-a919-3d0a46752177/1200/1200/False/chainsaw-man-vol-1.jpg",
+            "author": "Tatsuki Fujimoto",
+            "publisher": "Shueisha",
+            "genres": [
+                "Action Fiction",
+                "Comedy horror",
+                "Dark fantasy"
+            ],
+            "copise": 2
+        },
+        {
+            "id": 3,
+            "title": "One Piece",
+            "img": "https://upload.wikimedia.org/wikipedia/en/9/90/One_Piece%2C_Volume_61_Cover_%28Japanese%29.jpg",
+            "author": "Eiichiro Oda",
+            "publisher": "Viz Media",
+            "genres": [
+                "Adventure Fiction",
+                "Fantasy"
+            ],
+            "copise": 3
+        },
+        {
+            "id": 4,
+            "title": "One Punch Man",
+            "img": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/OnePunchMan_manga_cover.png/220px-OnePunchMan_manga_cover.png",
+            "author": "ONE",
+            "publisher": "Viz Media",
+            "genres": [
+                "Action",
+                "Gag comedy",
+                "Superhero"
+            ],
+            "copise": 4
+        },
+        {
+            "id": 5,
+            "title": "Demon Slayer: Kimetsu no Yaiba",
+            "img": "https://upload.wikimedia.org/wikipedia/en/0/09/Demon_Slayer_-_Kimetsu_no_Yaiba%2C_volume_1.jpg",
+            "author": "Koyoharu Gotouge",
+            "publisher": "Viz Media",
+            "genres": [
+                "Adventure fiction",
+                "Dark fantasy",
+                "Martial Arts"
+            ],
+            "copise": 5
+        }
+    ]
+}

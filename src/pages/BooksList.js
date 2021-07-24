@@ -1,64 +1,30 @@
 import BookCard from "../components/BookCard"
 import "./BooksList.css"
 import Masonry from "react-masonry-css"
-import Backdrop from "../components/Backdrop"
-import PopupForm from "../components/PopupForm"
+import Popup from "../components/Popup"
 import { useState, useEffect } from "react"
+import axios from "axios"
 
 const BookList = () => {
-    const [btnNewBook, setBtnNewBook] = useState(false)
-    const [allBooks, setAllBooks] = useState([])
+    const [btnAddBook, setBtnAddBook] = useState(false);
+    const [booksState, setBooksState] = useState([]);
 
-    const books = [
-        {
-            title: "JoJo's Bizarre Adventure",
-            img: "https://i.pinimg.com/originals/4a/de/69/4ade697d6c1476320f645a0ba38f9ecd.jpg",
-            author: "Hirohiko Araki",
-            publisher: "Viz Media",
-            genres: ["Adventure", "Fantasy", "Supernatural"],
-        },
-        {
-            title: "Chainsaw man",
-            img: "https://kbimages1-a.akamaihd.net/9b90e481-4b79-47e1-a919-3d0a46752177/1200/1200/False/chainsaw-man-vol-1.jpg",
-            author: "Tatsuki Fujimoto",
-            publisher: "Shueisha",
-            genres: ["Action Fiction", "Comedy horror", "Dark fantasy"],
-        },
-        {
-            title: "One Piece",
-            img: "https://upload.wikimedia.org/wikipedia/en/9/90/One_Piece%2C_Volume_61_Cover_%28Japanese%29.jpg",
-            author: "Eiichiro Oda",
-            publisher: "Viz Media",
-            genres: ["Adventure Fiction", "Fantasy"],
-        },
-        {
-            title: "One Punch Man",
-            img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/OnePunchMan_manga_cover.png/220px-OnePunchMan_manga_cover.png",
-            author: "ONE",
-            publisher: "Viz Media",
-            genres: ["Action", "Gag comedy", "Superhero"],
-        },
-        {
-            title: "Demon Slayer: Kimetsu no Yaiba",
-            img: "https://upload.wikimedia.org/wikipedia/en/0/09/Demon_Slayer_-_Kimetsu_no_Yaiba%2C_volume_1.jpg",
-            author: "Koyoharu Gotouge",
-            publisher: "Viz Media",
-            genres: ["Adventure fiction", "Dark fantasy", "Martial Arts"],
-        },
-    ]
-
-    useEffect(() => {
-        setAllBooks(books.sort((a, b) => (a["title"] < b["title"]) ? -1 : 1));
+    useEffect(async () => {
+        const res = await axios.get("http://localhost:1000/books");
+        setBooksState(res.data.sort((a, b) => (a["title"] < b["title"]) ? -1 : 1));
     }, [])
 
-    const sortBook = (by) => {
-        console.log(by, typeof (by));
-        setAllBooks(books.sort((a, b) => (a[by] < b[by]) ? -1 : 1));
-        console.log(allBooks);
+    const sortBook = async (by) => {
+        const res = await axios.get("http://localhost:1000/books");
+        if (by === "copise") {
+            setBooksState(res.data.sort((a, b) => (a[by] < b[by]) ? 1 : -1));
+        } else {
+            setBooksState(res.data.sort((a, b) => (a[by] < b[by]) ? -1 : 1));
+        }
     }
 
     const searchBook = (term) => {
-        setAllBooks(books.filter((book) => {
+        setBooksState(prev => prev.filter((book) => {
             const tTitle = book.title.toLowerCase();
             return tTitle.includes(term.toLowerCase());
         }))
@@ -90,19 +56,19 @@ const BookList = () => {
                     </div>
                 </div>
                 <div className="booksList-actionsRight">
-                    <button onClick={() => setBtnNewBook(true)}>ADD NEW BOOK</button>
+                    <button onClick={() => setBtnAddBook(true)}>ADD NEW BOOK</button>
                 </div>
             </section>
             <section>
                 <Masonry breakpointCols={breakpoints} className="my-masonry-grid" columnClassName="my-masonry-grid_column" >
-                    {allBooks.map((book, k) => (
-                        <div key={k}>
-                            <BookCard title={book.title} img={book.img} author={book.author} publisher={book.publisher} genres={book.genres} />
+                    {booksState.map((book) => (
+                        <div key={book.id}>
+                            <BookCard book={book} />
                         </div>
                     ))}
                 </Masonry>
             </section>
-            {btnNewBook && <><Backdrop closeForm={setBtnNewBook} /><PopupForm closeForm={setBtnNewBook} addBook={setAllBooks} /></>}
+            {btnAddBook && <Popup type="newBook" closeForm={setBtnAddBook} addBook={setBooksState} />}
         </main>
     )
 }
