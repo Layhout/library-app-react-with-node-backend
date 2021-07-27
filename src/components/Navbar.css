@@ -15,6 +15,7 @@
 .navbar-title{
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .navbar-menu ul{

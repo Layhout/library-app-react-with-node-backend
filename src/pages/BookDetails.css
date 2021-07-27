@@ -1,0 +1,32 @@
+.bookDetails{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    margin-top: 30px;
+}
+
+.bookDetails .bd-left img{
+    width: 100%;
+    object-fit: cover;
+    padding: 10px;
+    background-color: white;
+}
+
+.bookDetails .bd-right{
+    width: 100%;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bookDetails .bd-right h2{
+    border-bottom: 1px solid gray;
+}
+
+.bookDetails .bd-right .book-info{
+    display: flex;
+    margin-top: 10px;
+}
+
+.bookDetails .bd-right .book-info h3{
+    width: 20%;
+}

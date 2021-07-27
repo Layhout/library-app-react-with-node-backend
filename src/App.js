@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import VisitorsList from './pages/VisitorsList';
 import CardsList from './pages/CardsList';
 import Statistics from './pages/Statistics';
+import BookDetails from './pages/BookDetails';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route exact path="/statistics">
             <Statistics />
+          </Route>
+          <Route exact path="/books/:id">
+            <BookDetails />
           </Route>
         </Switch>
       </BrowserRouter>
