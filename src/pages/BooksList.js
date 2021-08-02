@@ -21,7 +21,7 @@ const BookList = () => {
         allBooks.sort((a, b) => (a["title"] < b["title"]) ? -1 : 1)
         setBooksState(allBooks);
         setIsLoading(false);
-    }, [])
+    }, []);
 
     const sortBook = async (by) => {
         const allBooks = await fetchBooks();
