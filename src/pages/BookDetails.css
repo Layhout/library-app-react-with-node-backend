@@ -30,3 +30,29 @@
 .bookDetails .bd-right .book-info h3{
     width: 20%;
 }
+
+.bookDetails .bd-right .book-info span{
+    text-transform: capitalize;
+}
+
+.bookDetails .bd-right .book-actions{
+    text-align: right;
+}
+
+.bookDetails .bd-right .book-actions button{
+    outline: none;
+    border: none;
+    padding: 10px 15px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    color: white;
+    text-transform: uppercase;
+    margin-left: 15px;
+}
+
+.bookDetails .bd-right .book-actions button:hover{
+    box-shadow: 0px 1px 5px gray;
+}

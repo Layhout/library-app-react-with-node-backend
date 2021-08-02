@@ -26,7 +26,7 @@ const BookList = () => {
     const sortBook = async (by) => {
         const allBooks = await fetchBooks();
         if (by === "copise") {
-            setBooksState(allBooks.sort((a, b) => (a[by] < b[by]) ? 1 : -1));
+            setBooksState(allBooks.sort((a, b) => b[by] - a[by]));
         } else {
             setBooksState(allBooks.sort((a, b) => (a[by] < b[by]) ? -1 : 1));
         }
@@ -42,7 +42,7 @@ const BookList = () => {
     }
 
     const breakpoints = {
-        default: 5,
+        default: 4,
         1100: 3,
         700: 2,
     }
@@ -74,14 +74,14 @@ const BookList = () => {
                 <Masonry breakpointCols={breakpoints} className="my-masonry-grid" columnClassName="my-masonry-grid_column" >
                     {booksState.map((book) => (
                         <Link key={book.id} to={`/books/${book.id}`}>
-                            <div>
+                            <div style={{ marginBottom: "15px" }}>
                                 <BookCard book={book} />
                             </div>
                         </Link>
                     ))}
                 </Masonry>
             </section>}
-            {btnAddBook && <Popup type="newBook" closeForm={setBtnAddBook} addBook={setBooksState} />}
+            {btnAddBook && <Popup type="newBook" closePopup={setBtnAddBook} addBook={setBooksState} />}
         </main>
     )
 }
