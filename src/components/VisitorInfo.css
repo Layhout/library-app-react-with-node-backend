@@ -1,0 +1,32 @@
+.visitorInfo{
+    display: grid;
+    grid-template-columns: 10% 40% 40% 10%;
+    padding: 10px;
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.visitorInfo .list-info{
+    border-right: 1px solid lightgray;
+    padding: 10px;
+    align-self: center;
+}
+
+.visitorInfo .list-action{
+    padding: 0;
+    border: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.visitorInfo .list-action span{
+    display: flex;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.visitorInfo span:hover{
+    background-color: lightgray;
+}

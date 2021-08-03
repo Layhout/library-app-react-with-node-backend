@@ -1,0 +1,9 @@
+.list .list-header{
+    display: grid;
+    grid-template-columns: 10% 40% 40% 10%;
+    padding: 0 10px;
+}
+
+.list .list-body ul{
+    list-style: none;
+}

@@ -1,0 +1,42 @@
+.actions{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.actionsLeft{
+    display: flex;
+    align-items: center;
+}
+
+#sort{
+    width: 200px !important;
+    outline: none;
+    margin-left: 10px;
+    font-size: 18px;
+    font-family: Poppins;
+    text-transform: capitalize;
+}
+
+.search-book{
+    display: flex;
+    align-items: center;
+    background: whitesmoke;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.actionsMid{
+    width: 500px;
+}
+
+.actionsMid .search-book input{
+    outline: none;
+    background: none;
+    border: none;
+    font-size: 18px;
+    margin-left: 10px;
+    width: 100%;
+}

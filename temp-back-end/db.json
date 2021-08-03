@@ -26,7 +26,7 @@
         "Dark fantasy"
       ],
       "synopsis": "In the world of Chainsaw Man, Devils are born from human fears. Devils are usually dangerous and malevolent, their power is proportional to how strongly their correspondent fear is incited in the collective human consciousness. However, humans can form contracts with them to use their powers. Individuals who specialize in hunting and employing Devils are called Devil hunters. Devils originate from Hell, and exist in an endless life cycle between Earth and Hell: they are reborn on Earth when killed in Hell, and vice-versa. Dwelling in Hell are extremely powerful Devils called Primal Fears, which have never been killed. Transit between the two planes appears to be overseen by the Hell Devil.\n\nA Devil may, in certain conditions, inhabit the body of a dead human, gaining some of their memories and personality; such a creature is called a Fiend. Devils who naturally have a human-like appearance are said to be benevolent towards humans.\n\nThe events of the story take place in 1997, in an alternate timeline where the Soviet Union still exists, and many historical events such as the Holocaust appear to have never occurred.",
-      "copise": 2
+      "copise": "100"
     },
     {
       "id": 3,
@@ -113,7 +113,7 @@
     {
       "title": "Gintama",
       "img": "https://comicvine.gamespot.com/a/uploads/scale_small/6/67663/7022689-77.jpg",
-      "author": " Hideaki Sorachi",
+      "author": "Hideaki Sorachi",
       "publisher": "NA ‎Viz Media",
       "genres": [
         "adventure",
@@ -149,6 +149,84 @@
       "synopsis": "Ichigo Kurosaki is a teenager from Karakura Town who can see ghosts, a talent which lets him meet supernatural trespasser Rukia Kuchiki who enters Ichigo's room in search of a Hollow, a kind of monstrous lost soul who can harm both ghosts and humans. Rukia is one of the Soul Reapers (死神, Shinigami, literally 'Death Gods'), soldiers trusted with ushering the souls of the dead from the World of the Living to the Soul Society (尸魂界 (ソウル・ソサエティ), lit. \"Dead Spirit World\")—the afterlife realm from which she originates—and with fighting Hollows. When she is severely wounded defending Ichigo from a Hollow she is pursuing, Rukia transfers her powers to Ichigo so that he may fight in her stead while she recovers her strength. Rukia is thereby trapped in an ordinary human body, and must advise Ichigo as he balances the demands of his substitute Soul Reaper duties and attending high school. For aid in hunting the Hollows, the pair ally with a trio of other spiritually empowered teenagers: Ichigo's high school classmate Orihime Inoue, best friend Yasutora \"Chad\" Sado and the Quincy—humans who have the ability to control spirit particles—Uryū Ishida.",
       "copise": "100",
       "id": 12
+    },
+    {
+      "title": "Jujutsu Kaisen",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/4/46/Jujutsu_kaisen.jpg/220px-Jujutsu_kaisen.jpg",
+      "author": "Gege Akutami",
+      "publisher": "Shueisha",
+      "genres": [
+        "adventure",
+        "dark fantasy",
+        "supernatural"
+      ],
+      "synopsis": "In Jujutsu Kaisen, all living beings emanate an energy called Cursed Energy,[Jp. 1] which arises from negative emotions that naturally flow throughout the body. Normal people cannot control this flow in their bodies. As a result, they continually lose Cursed Energy, resulting in the birth of Curses,[Jp. 2] a race of spiritual beings whose primary desire is to bring harm to humanity. These curses are shown as gruesome monsters.",
+      "copise": "100",
+      "id": 13
+    },
+    {
+      "title": "Miss Kobayashi's Dragon Maid",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/2/2d/Miss_Kobayashi%27s_Dragon_Maid%2C_volume_1.jpg/220px-Miss_Kobayashi%27s_Dragon_Maid%2C_volume_1.jpg",
+      "author": "Coolkyousinnjya",
+      "publisher": "Futabasha",
+      "genres": [
+        "yuri",
+        "comedy",
+        "fantasy"
+      ],
+      "synopsis": "As office worker and programmer Kobayashi gets ready for work, she is greeted by a large dragon right outside her front door. The dragon immediately transforms into a human girl in a maid outfit, and introduces herself as Tohru. It turns out, that during a drunken excursion into the mountains the night before, Kobayashi had encountered the dragon, who claimed to have come from another world. Subsequently, Kobayashi had removed a holy sword from Tohru's back, earning her gratitude. With Tohru having no place to stay, Kobayashi offers to let the dragon stay at her home and become her personal maid, to which she agrees.",
+      "copise": "100",
+      "id": 14
+    },
+    {
+      "title": "Himouto! Umaru-chan",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/1/1e/Him%C5%8Dto%21_Umaru-chan_volume_1_cover.jpg/220px-Him%C5%8Dto%21_Umaru-chan_volume_1_cover.jpg",
+      "author": "Sankaku Head",
+      "publisher": "Shueisha",
+      "genres": [
+        "comedy",
+        "slice of life"
+      ],
+      "synopsis": "Umaru Doma is a high school girl who lives with her older brother Taihei. At school, Umaru appears to be the ideal student with good looks, top grades and many talents. However, she transforms into a kid-sized layabout and spends time at home feeding her video game and food addiction, much to Taihei's dismay. Throughout the series, Umaru uses her alternative personality to make friends with others, while at home she throws tantrums about Taihei not buying her things.",
+      "copise": "100",
+      "id": 15
+    }
+  ],
+  "visitors": [
+    {
+      "id": 1,
+      "name": "Jennifer G. Speirs",
+      "phone": "609-613-4030"
+    },
+    {
+      "id": 2,
+      "name": "Mercedes W. Scott",
+      "phone": "312-970-8921"
+    },
+    {
+      "id": 3,
+      "name": "Frank G. Pearce",
+      "phone": "502-464-0615"
+    },
+    {
+      "name": "Jana E. Stevens",
+      "phone": "901-481-6039",
+      "id": 4
+    },
+    {
+      "name": "Jennifer E. Burson",
+      "phone": "406-499-1965",
+      "id": 5
+    },
+    {
+      "name": "James J. McLean",
+      "phone": "703-561-5866",
+      "id": 6
+    },
+    {
+      "name": "Merlin A. May",
+      "phone": "321-284-7525",
+      "id": 7
     }
   ]
 }

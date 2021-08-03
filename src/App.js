@@ -1,4 +1,3 @@
-import './App.css';
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import BooksList from './pages/BooksList';
 import Navbar from './components/Navbar';
