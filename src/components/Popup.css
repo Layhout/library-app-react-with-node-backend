@@ -33,7 +33,7 @@
   padding: 0 15px;
 }
 
-.input-form input{
+.input-form input, .input-form select{
   width: 100%;
   margin-bottom: 15px;
   outline: none;
@@ -68,8 +68,4 @@
 .delete-book .delete-actions{
   display: flex;
   justify-content: space-evenly;
-}
-
-.newVisitorForm{
-  padding: 40px;
 }

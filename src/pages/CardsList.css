@@ -1,0 +1,9 @@
+.cardsList .list .list-header{
+    display: grid;
+    grid-template-columns: 10% 25% 25% 20% 20%;
+    padding: 0 10px;
+}
+
+.cardsList .list .list-body ul{
+    list-style: none;
+}

@@ -1,31 +1,29 @@
-.visitorInfo{
+.cardInfo{
     display: grid;
-    grid-template-columns: 10% 40% 40% 10%;
-    padding: 10px;
+    grid-template-columns: 10% 25% 25% 20% 20%;
     background-color: white;
+    padding: 10px;
     margin-top: 10px;
     border-radius: 10px;
 }
 
-.visitorInfo .list-info{
+.cardInfo .list-info{
     border-right: 1px solid lightgray;
     padding: 10px;
 }
 
-.visitorInfo .list-action{
-    padding: 0;
-    border: 0;
+.cardInfo .list-action{
     display: flex;
     justify-content: center;
 }
 
-.visitorInfo .list-action span{
-    display: flex;
+.cardInfo .list-action .icon{
     padding: 10px;
+    display: flex;
     border-radius: 50%;
     cursor: pointer;
 }
 
-.visitorInfo span:hover{
+.cardInfo .list-action .icon:hover{
     background-color: lightgray;
 }

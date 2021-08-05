@@ -154,7 +154,7 @@ const NewVisitorForm = ({ closePopup, addVisitor, edit, v2Edit, updVS }) => {
     }
 
     return (
-        <section className="newVisitorForm">
+        <section style={{ padding: "40px" }}>
             <h1 style={{ textAlign: "center", marginBottom: "20px" }}>{popupTitle}</h1>
             <form className="input-form" onSubmit={handleSubmit}>
                 <label htmlFor="">Full Name:</label>
@@ -170,7 +170,65 @@ const NewVisitorForm = ({ closePopup, addVisitor, edit, v2Edit, updVS }) => {
     )
 }
 
-const SwitchPopup = ({ type, closePopup, addBook, bTitle, bId, b2Edit, editedBook, addVisitor, v2Edit, updVS }) => {
+const NewCardForm = ({ closePopup, addCard }) => {
+    const [allVisitor, setAllVisitor] = useState([])
+    const [allBook, setAllBook] = useState([]);
+    const [selectedVisitor, setSelectedVisitor] = useState("");
+    const [selectedBook, setSelectedBook] = useState("");
+
+    useEffect(async () => {
+        const res1 = await axios.get("http://localhost:1000/visitors");
+        setAllVisitor(res1.data);
+        const res2 = await axios.get("http://localhost:1000/books");
+        setAllBook(res2.data);
+    }, [])
+
+    const formatedToday = () => {
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const MM = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const yyyy = today.getFullYear();
+        const hh = String(today.getHours() % 12).padStart(2, "0");
+        const mm = String(today.getMinutes()).padStart(2, "0");
+        const ampm = hh >= 12 ? "pm" : "am";
+        return dd + '/' + MM + '/' + yyyy + " (" + hh + ":" + mm + " " + ampm + ")";
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const res = await axios.post("http://localhost:1000/cards", { visitor: selectedVisitor, book: selectedBook, bDate: formatedToday(), rDate: "" });
+        addCard(prev => prev.concat(res.data));
+        closePopup(prev => !prev)
+    }
+
+    return (
+        <section style={{ padding: "40px" }}>
+            <h1 style={{ textAlign: "center", marginBottom: "20px" }}>New Card</h1>
+            <form className="input-form" onSubmit={(e) => handleSubmit(e)}>
+                <label htmlFor="">Visitor:</label>
+                <select name="" id="" onChange={(e) => setSelectedVisitor(e.target.value)}>
+                    <option value="">Select</option>
+                    {allVisitor.map((av) => (
+                        <option value={av.name} key={av.id}>{av.name}</option>
+                    ))}
+                </select>
+                <label htmlFor="">Book:</label>
+                <select name="" id="" onChange={(e) => setSelectedBook(e.target.value)}>
+                    <option value="">Select</option>
+                    {allBook.map((ab) => (
+                        <option value={ab.title} key={ab.id}>{ab.title}</option>
+                    ))}
+                </select>
+                <div style={{ display: "flex", justifyContent: "center", marginTop: "20px", gap: "20px" }}>
+                    <button className="btn" style={{ backgroundColor: "lightgrey", color: "black" }} onClick={() => closePopup(prev => !prev)}>Cancel</button>
+                    <button className="btn" type="submit" style={{ backgroundColor: "#52c41a" }}>Save</button>
+                </div>
+            </form>
+        </section>
+    )
+}
+
+const SwitchPopup = ({ type, closePopup, addBook, bTitle, bId, b2Edit, editedBook, addVisitor, v2Edit, updVS, addCard }) => {
     switch (type) {
         case "newBook":
             return <NewBookForm closePopup={closePopup} addBook={addBook} />
@@ -182,20 +240,21 @@ const SwitchPopup = ({ type, closePopup, addBook, bTitle, bId, b2Edit, editedBoo
             return <NewVisitorForm closePopup={closePopup} addVisitor={addVisitor} />
         case "editVisitor":
             return <NewVisitorForm closePopup={closePopup} edit={true} v2Edit={v2Edit} updVS={updVS} />
+        case "newCard":
+            return <NewCardForm closePopup={closePopup} addCard={addCard} />
         default:
             return <div style={{ textAlign: "center" }}>
                 You didn't specify the correct kind of Popup.
             </div>
-
     }
 }
 
-const Popup = ({ type, closePopup, addBook, bTitle, bId, b2Edit, editedBook, addVisitor, v2Edit, updVS }) => {
+const Popup = ({ type, closePopup, addBook, bTitle, bId, b2Edit, editedBook, addVisitor, v2Edit, updVS, addCard }) => {
     return (
         <div>
             <Backdrop closePopup={closePopup} />
             <div className={`popup ${type === "deleteBook" ? "delete-book" : ""}`}>
-                <SwitchPopup type={type} closePopup={closePopup} addBook={addBook} bTitle={bTitle} bId={bId} b2Edit={b2Edit} editedBook={editedBook} addVisitor={addVisitor} v2Edit={v2Edit} updVS={updVS} />
+                <SwitchPopup type={type} closePopup={closePopup} addBook={addBook} bTitle={bTitle} bId={bId} b2Edit={b2Edit} editedBook={editedBook} addVisitor={addVisitor} v2Edit={v2Edit} updVS={updVS} addCard={addCard} />
             </div>
         </div>
     )

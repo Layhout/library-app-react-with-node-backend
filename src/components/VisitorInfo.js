@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Popup from "./Popup"
 import "./VisitorInfo.css"
 
@@ -8,19 +8,13 @@ const VisitorInfo = ({ visitor, updVS }) => {
     return (
         <li className="visitorInfo">
             <div className="list-info">
-                <p>
-                    {visitor.id}
-                </p>
+                {visitor.id}
             </div>
             <div className="list-info">
-                <p>
-                    {visitor.name}
-                </p>
+                {visitor.name}
             </div>
             <div className="list-info">
-                <p>
-                    {visitor.phone}
-                </p>
+                {visitor.phone}
             </div>
             <div className="list-action">
                 <span onClick={() => setBtnEditV(true)}>

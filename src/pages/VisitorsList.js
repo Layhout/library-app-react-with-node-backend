@@ -56,8 +56,8 @@ const Visitors = () => {
                 <div className="list-body">
                     {isLoading ? <h2 style={{ textAlign: "center", marginTop: "30px" }}>Loading...</h2> :
                         <ul>
-                            {visitorState.map((av) => (
-                                <VisitorInfo key={av.id} visitor={av} updVS={updVisitorState} />
+                            {visitorState.map((vs, k) => (
+                                <VisitorInfo key={vs.id} visitor={vs} updVS={updVisitorState} />
                             ))}
                         </ul>
                     }
