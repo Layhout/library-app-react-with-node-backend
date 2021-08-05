@@ -19,7 +19,7 @@ const BookList = () => {
 
     useEffect(async () => {
         const allBooks = await fetchBooks();
-        allBooks.sort((a, b) => (a["title"] < b["title"]) ? -1 : 1)
+        allBooks.sort((a, b) => (a["title"].toLowerCase() < b["title"].toLowerCase()) ? -1 : 1)
         setBooksState(allBooks);
         setIsLoading(false);
     }, []);
@@ -29,7 +29,7 @@ const BookList = () => {
         if (by === "copise") {
             setBooksState(allBooks.sort((a, b) => b[by] - a[by]));
         } else {
-            setBooksState(allBooks.sort((a, b) => (a[by] < b[by]) ? -1 : 1));
+            setBooksState(allBooks.sort((a, b) => (a[by].toLowerCase() < b[by].toLowerCase()) ? -1 : 1));
         }
     }
 

@@ -16,29 +16,32 @@ const Visitors = () => {
     }
 
     useEffect(async () => {
-        const allVisitors = await fetchVisitor();
-        allVisitors.sort((a, b) => (a.id - b.id));
-        setVisitorState(allVisitors);
+        setVisitorState(await fetchVisitor());
         setIsLoading(false);
     }, [])
 
     const sortVisitor = async (by) => {
         const allVisitors = await fetchVisitor();
-        setVisitorState(allVisitors.sort((a, b) => (a[by] < b[by]) ? -1 : 1));
+        if (by === "name") {
+            setVisitorState(allVisitors.sort((a, b) => (a[by].toLowerCase() < b[by].toLowerCase()) ? -1 : 1));
+        } else {
+            setVisitorState(allVisitors.sort((a, b) => (a[by] < b[by]) ? -1 : 1));
+        }
     }
 
     const searchVisitor = async (term) => {
         const allVisitors = await fetchVisitor();
-        allVisitors.sort((a, b) => (a["name"] < b["name"]) ? -1 : 1);
+        allVisitors.sort((a, b) => (a["name"].toLowercase() < b["name"].toLowercase()) ? -1 : 1);
         setVisitorState(allVisitors.filter((visitor => {
             const tVName = visitor.name.toLowerCase();
             return tVName.includes(term.toLowerCase());
         })));
     }
 
-    const updVisitorState = (editedVisitor) => {
-        setVisitorState(prev => prev.filter((p) => p.id !== editedVisitor.id));
-        setVisitorState(prev => prev.concat(editedVisitor));
+    const updVisitorState = (i, editedVisitor) => {
+        const newVisitorState = [...visitorState];
+        newVisitorState[i] = editedVisitor;
+        setVisitorState(newVisitorState);
     }
 
     return (
@@ -57,7 +60,7 @@ const Visitors = () => {
                     {isLoading ? <h2 style={{ textAlign: "center", marginTop: "30px" }}>Loading...</h2> :
                         <ul>
                             {visitorState.map((vs, k) => (
-                                <VisitorInfo key={vs.id} visitor={vs} updVS={updVisitorState} />
+                                <VisitorInfo key={vs.id} visitor={vs} updVS={updVisitorState} i={k} />
                             ))}
                         </ul>
                     }

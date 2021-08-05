@@ -61,6 +61,10 @@
   gap: 20px;
 }
 
+.input-form option, .input-form select{
+  text-transform: capitalize;
+}
+
 .delete-book{
     top: 30vh;
 }

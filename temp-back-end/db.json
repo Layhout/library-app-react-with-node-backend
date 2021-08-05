@@ -119,7 +119,7 @@
         "adventure",
         "Science fiction comedy‎"
       ],
-      "synopsis": "The story is set in an alternate-history late-Edo period, where humanity is attacked by aliens called \"Amanto\" (天人, \"Sky People\"). Edo Japan's samurai fights to defend Earth, but the shōgun cowardly surrenders when he realizes the aliens' power. He agrees to an unequal contract with the aliens, placing a ban on carrying swords in public and allowing the invaders to enter the country. The samurai's swords are confiscated and the Tokugawa bakufu (shogunate) becomes a puppet government.",
+      "synopsis": "The story is set in an alternate-history late-Edo period, where humanity is attacked by aliens called \"amanto\" (天人, \"Sky People\"). Edo Japan's samurai fights to defend Earth, but the shōgun cowardly surrenders when he realizes the aliens' power. He agrees to an unequal contract with the aliens, placing a ban on carrying swords in public and allowing the invaders to enter the country. The samurai's swords are confiscated and the Tokugawa bakufu (shogunate) becomes a puppet government.",
       "copise": "100",
       "id": 10
     },
@@ -200,8 +200,8 @@
     },
     {
       "id": 2,
-      "name": "Mercedes W. Scott 2",
-      "phone": "312-970-8921 2"
+      "name": "Mercedes W. Scott",
+      "phone": "312-970-8921"
     },
     {
       "id": 3,
@@ -242,6 +242,11 @@
       "name": "Pauline S. Parks",
       "phone": "724-860-7919",
       "id": 10
+    },
+    {
+      "name": "Stacy B. Holle",
+      "phone": "316-616-7188",
+      "id": 11
     }
   ],
   "cards": [
@@ -250,49 +255,63 @@
       "visitor": "Jennifer G. Speirs",
       "book": "chainsaw man",
       "bDate": "05/08/2021",
-      "rDate": "05/08/2021"
+      "rDate": "05/08/2021 (04:57 pm)"
     },
     {
       "visitor": "Merlin A. May",
       "book": "One Punch Man",
-      "bDate": "05/08/2021 01:17 am",
+      "bDate": "05/08/2021 01:17 pm",
       "rDate": "",
       "id": 2
     },
     {
       "visitor": "Mercedes W. Scott",
       "book": "Jujutsu Kaisen",
-      "bDate": "05/08/2021 01:22 am",
+      "bDate": "05/08/2021 01:22 pm",
       "rDate": "",
       "id": 3
     },
     {
       "visitor": "James J. McLean",
       "book": "JoJo's Bizarre Adventure",
-      "bDate": "05/08/2021 (01:26 am)",
+      "bDate": "05/08/2021 (01:26 pm)",
       "rDate": "",
       "id": 4
     },
     {
       "visitor": "Pauline S. Parks",
       "book": "Demon Slayer: Kimetsu no Yaiba",
-      "bDate": "05/08/2021 (01:34 am)",
+      "bDate": "05/08/2021 (01:34 pm)",
       "rDate": "",
       "id": 5
     },
     {
       "visitor": "Frank G. Pearce",
       "book": "bleach",
-      "bDate": "05/08/2021 (01:34 am)",
+      "bDate": "05/08/2021 (01:34 pm)",
       "rDate": "",
       "id": 6
     },
     {
       "visitor": "Teresa M. Hopkins",
       "book": "One Piece",
-      "bDate": "05/08/2021 (01:35 am)",
+      "bDate": "05/08/2021 (01:35 pm)",
       "rDate": "",
       "id": 7
+    },
+    {
+      "visitor": "Jana E. Stevens",
+      "book": "dr. stone",
+      "bDate": "05/08/2021 (03:31 pm)",
+      "rDate": "",
+      "id": 8
+    },
+    {
+      "visitor": "Keith J. Conner",
+      "book": "dr. stone",
+      "bDate": "05/08/2021 (04:20 pm)",
+      "rDate": "",
+      "id": 9
     }
   ]
 }

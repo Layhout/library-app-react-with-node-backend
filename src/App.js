@@ -5,6 +5,7 @@ import VisitorsList from './pages/VisitorsList';
 import CardsList from './pages/CardsList';
 import Statistics from './pages/Statistics';
 import BookDetails from './pages/BookDetails';
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           </Route>
         </Switch>
       </BrowserRouter>
+      <Footer />
     </div>
   );
 }
