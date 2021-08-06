@@ -15,9 +15,13 @@ const CardsList = () => {
         return res.data;
     }
 
-    useEffect(async () => {
-        setCardState(await fetchCard());
-        setIsLoading(false);
+    useEffect(() => {
+        fetchCard().then((data) => {
+            setCardState(data);
+            setIsLoading(false);
+        }).catch((err) => {
+            console.log(err);
+        })
     }, [])
 
     const updCardState = (i, newCard) => {
@@ -29,7 +33,7 @@ const CardsList = () => {
     const sortCard = async (by) => {
         const allCard = await fetchCard();
         if (by === "book" || by === "visitor") {
-            setCardState(allCard.sort((a, b) => (a[by].toLowerCase() < b[by].toLowerCase()) ? -1 : 1));
+            setCardState(allCard.sort((a, b) => (a[by] < b[by]) ? -1 : 1));
         } else {
             setCardState(allCard.sort((a, b) => (a[by] < b[by]) ? -1 : 1));
         }

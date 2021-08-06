@@ -13,12 +13,15 @@ const BookDetails = () => {
     const [btnDelete, setBtnDelete] = useState(false);
     const [btnEdit, setBtnEdit] = useState(false);
 
-    useEffect(async () => {
-        const res = await axios.get(`http://localhost:1000/books/${id}`);
-        setBook(res.data);
-        setBookGenres(res.data.genres);
-        setIsLoading(false)
-    }, [])
+    useEffect(() => {
+        axios.get(`http://localhost:1000/books/${id}`).then((res) => {
+            setBook(res.data);
+            setBookGenres(res.data.genres);
+            setIsLoading(false)
+        }).catch((err) => {
+            console.log(err);
+        })
+    }, [id])
 
     return (
         isLoading ? <h2 style={{ textAlign: "center", marginTop: "30px" }}>Loading...</h2> : <main className="bookDetails">
@@ -46,7 +49,7 @@ const BookDetails = () => {
                     <h3>Synopsis: </h3> <p style={{ width: "80%" }}>{book.synopsis}</p>
                 </div>
                 <div className="book-info">
-                    <h3>Copise left: </h3> <span>{book.copise}</span>
+                    <h3>copies left: </h3> <span>{book.copies}</span>
                 </div>
                 <div className="book-actions">
                     <button className="btn" style={{ backgroundColor: "#E53935" }} onClick={() => setBtnDelete(true)}>

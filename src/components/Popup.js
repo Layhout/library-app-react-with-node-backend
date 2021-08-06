@@ -12,7 +12,7 @@ const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
     const [author, setAuthor] = useState("");
     const [publisher, setPublisher] = useState("");
     const [des, setDes] = useState("");
-    const [copise, setCopise] = useState("");
+    const [copies, setCopies] = useState("");
     const inputRef = useRef();
     const [genres, setGenres] = useState([]);
     const [popupTitle, setPopupTitle] = useState("Adding a new book")
@@ -24,20 +24,26 @@ const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
             setAuthor(b2Edit.author);
             setPublisher(b2Edit.publisher);
             setDes(b2Edit.synopsis);
-            setCopise(b2Edit.copise);
+            setCopies(b2Edit.copies);
             setGenres(b2Edit.genres);
             setPopupTitle("Editing a Book Info")
         }
-    }, [])
+    }, [b2Edit, edit])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!edit) {
-            const res = await axios.post("http://localhost:1000/books", { title: title.trim(), img: imgUrl.trim(), author: author.trim(), publisher: publisher.trim(), genres, synopsis: des, copise });
-            addBook(prev => prev.concat(res.data));
-            closePopup(prev => !prev);
+            const res = await axios.get(`http://localhost:1000/books?title=${title}`);
+            if (res.data.length === 0) {
+                const res = await axios.post("http://localhost:1000/books", { title: title.trim(), img: imgUrl.trim(), author: author.trim(), publisher: publisher.trim(), genres, synopsis: des, copies, borrowed: 0 });
+                addBook(prev => prev.concat(res.data));
+                closePopup(prev => !prev);
+            } else {
+                closePopup(prev => !prev);
+                alert(`Operation fail because ${title} already exists in the DataBase.`);
+            }
         } else {
-            const res = await axios.patch(`http://localhost:1000/books/${b2Edit.id}`, { title: title.trim(), img: imgUrl.trim(), author: author.trim(), publisher: publisher.trim(), genres, synopsis: des, copise });
+            const res = await axios.patch(`http://localhost:1000/books/${b2Edit.id}`, { title: title.trim(), img: imgUrl.trim(), author: author.trim(), publisher: publisher.trim(), genres, synopsis: des, copies });
             editedBook(res.data);
             closePopup(prev => !prev);
         }
@@ -67,7 +73,7 @@ const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
                 <h1>{popupTitle}</h1>
                 <form action="" onSubmit={handleSubmit}>
                     <label htmlFor="title">Title: </label>
-                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title of the book" required />
+                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value.toLowerCase())} placeholder="Title of the book" required />
                     <div style={{ display: "flex", gap: "20px" }}>
                         <div>
                             <label htmlFor="title">Author: </label>
@@ -93,8 +99,8 @@ const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
                             </div>
                         </div>
                         <div>
-                            <label htmlFor="title">Copise: </label>
-                            <input type="number" min={0} value={copise} onChange={(e) => setCopise(e.target.value)} placeholder="Number of books..." required />
+                            <label htmlFor="title">copies: </label>
+                            <input type="number" min={0} value={copies} onChange={(e) => setCopies(e.target.value)} placeholder="Number of books..." required />
                         </div>
                     </div>
                     <label htmlFor="title" >Image Url: </label>
@@ -139,14 +145,20 @@ const NewVisitorForm = ({ closePopup, addVisitor, edit, v2Edit, updVS, i }) => {
             setPNum(v2Edit.phone);
             setPopupTitle("Editing a Visitor Info");
         }
-    }, []);
+    }, [edit, v2Edit]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const res = await axios.get(`http://localhost:1000/visitors?fname=${fname}`)
         if (!edit) {
-            const res = await axios.post("http://localhost:1000/visitors", { name: fname, phone: pNum });
-            addVisitor(prev => prev.concat(res.data));
-            closePopup(prev => !prev);
+            if (res.data === 0) {
+                const res = await axios.post("http://localhost:1000/visitors", { name: fname, phone: pNum, borrowRecord: [] });
+                addVisitor(prev => prev.concat(res.data));
+                closePopup(prev => !prev);
+            } else {
+                alert(`Operation fail because ${fname} already exists in the DataBase!`);
+                closePopup(prev => !prev);
+            }
         } else {
             const res = await axios.patch(`http://localhost:1000/visitors/${v2Edit.id}`, { name: fname, phone: pNum });
             updVS(i, res.data);
@@ -159,9 +171,9 @@ const NewVisitorForm = ({ closePopup, addVisitor, edit, v2Edit, updVS, i }) => {
             <h1 style={{ textAlign: "center", marginBottom: "20px" }}>{popupTitle}</h1>
             <form className="input-form" onSubmit={handleSubmit}>
                 <label htmlFor="">Full Name:</label>
-                <input type="text" value={fname} onChange={(e) => setFname(e.target.value)} placeholder="First name and last name" required />
+                <input type="text" value={fname} onChange={(e) => setFname(e.target.value.toLowerCase())} placeholder="First name and last name" required />
                 <label htmlFor="">Phone:</label>
-                <input type="text" value={pNum} onChange={(e) => setPNum(e.target.value)} placeholder="Phone number" required />
+                <input type="number" value={pNum} onChange={(e) => setPNum(e.target.value)} placeholder="Phone number" required />
                 <div style={{ display: "flex", justifyContent: "center", marginTop: "20px", gap: "20px" }}>
                     <button className="btn" style={{ backgroundColor: "lightgrey", color: "black" }} onClick={() => closePopup(prev => !prev)}>Cancel</button>
                     <button className="btn" type="submit" style={{ backgroundColor: "#52c41a" }}>Save</button>
@@ -177,16 +189,34 @@ const NewCardForm = ({ closePopup, addCard }) => {
     const [selectedVisitor, setSelectedVisitor] = useState("");
     const [selectedBook, setSelectedBook] = useState("");
 
-    useEffect(async () => {
-        const res1 = await axios.get("http://localhost:1000/visitors");
-        setAllVisitor(res1.data);
-        const res2 = await axios.get("http://localhost:1000/books");
-        setAllBook(res2.data);
+    useEffect(() => {
+        axios.get("http://localhost:1000/visitors").then((res) => {
+            setAllVisitor(res.data);
+        }).catch((err) => {
+            console.log(err);
+        })
+        axios.get("http://localhost:1000/books").then((res) => {
+            setAllBook(res.data.filter(rd => rd.copies > 0));
+        }).catch((err) => {
+            console.log(err);
+        })
     }, [])
+
+    const subIdName = (value) => {
+        const id = parseInt(value);
+        const text = value.substr(value.indexOf(" ") + 1);
+        return { id, text };
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await axios.post("http://localhost:1000/cards", { visitor: selectedVisitor, book: selectedBook, bDate: formatedToday(), rDate: "" });
+        const visitor = subIdName(selectedVisitor);
+        const book = subIdName(selectedBook);
+        const res = await axios.post("http://localhost:1000/cards", { visitorId: visitor.id, visitor: visitor.text, bookId: book.id, book: book.text, bDate: formatedToday(), rDate: "" });
+        const res1 = await axios.get(`http://localhost:1000/visitors/${visitor.id}`);
+        await axios.patch(`http://localhost:1000/visitors/${visitor.id}`, { borrowRecord: res1.data.borrowRecord.concat(book.text) });
+        const res2 = await axios.get(`http://localhost:1000/books/${book.id}`);
+        await axios.patch(`http://localhost:1000/books/${book.id}`, { copies: --res2.data.copies, borrowed: ++res2.data.borrowed });
         addCard(prev => prev.concat(res.data));
         closePopup(prev => !prev)
     }
@@ -198,15 +228,15 @@ const NewCardForm = ({ closePopup, addCard }) => {
                 <label htmlFor="">Visitor:</label>
                 <select onChange={(e) => setSelectedVisitor(e.target.value)}>
                     <option value="">Select</option>
-                    {allVisitor.map((av, k) => (
-                        <option value={av.name} key={k}>{av.name}</option>
+                    {allVisitor.map((a, k) => (
+                        <option value={a.id + " " + a.name} key={k}>{a.name}</option>
                     ))}
                 </select>
                 <label htmlFor="">Book:</label>
                 <select onChange={(e) => setSelectedBook(e.target.value)}>
                     <option value="">Select</option>
-                    {allBook.map((ab, k) => (
-                        <option value={ab.title} key={k}>{ab.title}</option>
+                    {allBook.map((b, k) => (
+                        <option value={b.id + " " + b.title} key={k}>{b.title}</option>
                     ))}
                 </select>
                 <div style={{ display: "flex", justifyContent: "center", marginTop: "20px", gap: "20px" }}>

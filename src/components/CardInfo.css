@@ -10,11 +10,15 @@
 .cardInfo .list-info{
     border-right: 1px solid lightgray;
     padding: 10px;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
 }
 
 .cardInfo .list-action{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .cardInfo .list-action .icon{

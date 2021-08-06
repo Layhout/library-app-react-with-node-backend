@@ -1,0 +1,71 @@
+.stage{
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    row-gap: 20px;
+    width: 70%;
+    margin: 0 auto;
+    align-items: flex-end;
+    margin-top: 30px;
+}
+
+.stage div img{
+    width: 100%;
+}
+
+.stage .title{
+    align-self: flex-start;
+}
+
+.stage div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stage div h3{
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+}
+
+.stage .first{
+    border: 10px solid #fccd4b;
+}
+
+.stage .second{
+    border: 10px solid #C0C0C0;
+}
+
+.stage .third{
+    border: 10px solid #CD7F32;
+}
+
+.sub-stage{
+    width: 80%;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: 49% 49%;
+    column-gap: 2%;
+}
+
+.sub-stage div{
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+}
+
+.sub-stage div img{
+    width: 40%;
+    object-fit: cover;
+}
+
+.sub-stage div .title{
+    width: 60%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sub-stage div .title h3{
+    margin-bottom: 10px;
+}

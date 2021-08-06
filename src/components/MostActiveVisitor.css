@@ -1,0 +1,33 @@
+.mav{
+    display: flex;
+    flex-direction: column;
+}
+
+.mav h1{
+    margin-bottom: 30px;
+}
+
+.mav div{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    text-transform: capitalize;
+}
+
+.mav .first-place{
+    font-size: 25px;
+    background: linear-gradient(to right, #F09819, #EDDE5D);
+}
+
+.mav .second-place{
+    font-size: 23px;
+    background: linear-gradient(to right, #536976, #BBD2C5);
+}
+
+.mav .third-place{
+    font-size: 20px;
+    background: linear-gradient(to right, #94716B, #B79891);
+}

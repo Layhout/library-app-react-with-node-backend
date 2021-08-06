@@ -15,9 +15,11 @@ const Visitors = () => {
         return res.data;
     }
 
-    useEffect(async () => {
-        setVisitorState(await fetchVisitor());
-        setIsLoading(false);
+    useEffect(() => {
+        fetchVisitor().then((data) => {
+            setVisitorState(data);
+            setIsLoading(false);
+        })
     }, [])
 
     const sortVisitor = async (by) => {

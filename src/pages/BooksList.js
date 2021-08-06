@@ -17,19 +17,22 @@ const BookList = () => {
         return res.data;
     }
 
-    useEffect(async () => {
-        const allBooks = await fetchBooks();
-        allBooks.sort((a, b) => (a["title"].toLowerCase() < b["title"].toLowerCase()) ? -1 : 1)
-        setBooksState(allBooks);
-        setIsLoading(false);
+    useEffect(() => {
+        fetchBooks().then((data) => {
+            data.sort((a, b) => (a["title"] < b["title"]) ? -1 : 1)
+            setBooksState(data);
+            setIsLoading(false);
+        }).catch((err) => {
+            console.log(err);
+        });
     }, []);
 
     const sortBook = async (by) => {
         const allBooks = await fetchBooks();
-        if (by === "copise") {
+        if (by === "copies") {
             setBooksState(allBooks.sort((a, b) => b[by] - a[by]));
         } else {
-            setBooksState(allBooks.sort((a, b) => (a[by].toLowerCase() < b[by].toLowerCase()) ? -1 : 1));
+            setBooksState(allBooks.sort((a, b) => (a[by] < b[by]) ? -1 : 1));
         }
     }
 
@@ -37,8 +40,7 @@ const BookList = () => {
         const allBooks = await fetchBooks();
         allBooks.sort((a, b) => (a["title"] < b["title"]) ? -1 : 1);
         setBooksState(allBooks.filter((book) => {
-            const tTitle = book.title.toLowerCase();
-            return tTitle.includes(term.toLowerCase());
+            return book.title.includes(term);
         }))
     }
 
@@ -51,7 +53,7 @@ const BookList = () => {
     return (
         <main className="booksList">
             <section>
-                <ActionsBar sort={sortBook} search={searchBook} setBtnAdd={setBtnAddBook} sortOp={["title", "author", "copise"]} searchBy="Search By Title" btnName="add new book" />
+                <ActionsBar sort={sortBook} search={searchBook} setBtnAdd={setBtnAddBook} sortOp={["title", "author", "copies"]} searchBy="Search By Title" btnName="add new book" />
             </section>
             {isLoading ? <h2 style={{ textAlign: "center", marginTop: "30px" }}>Loading...</h2> : <section>
                 <Masonry breakpointCols={breakpoints} className="my-masonry-grid" columnClassName="my-masonry-grid_column" >

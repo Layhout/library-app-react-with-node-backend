@@ -2,7 +2,7 @@
   "books": [
     {
       "id": 1,
-      "title": "JoJo's Bizarre Adventure",
+      "title": "jojo's bizarre adventure",
       "img": "https://i.pinimg.com/originals/4a/de/69/4ade697d6c1476320f645a0ba38f9ecd.jpg",
       "author": "Hirohiko Araki",
       "publisher": "Viz Media",
@@ -12,11 +12,12 @@
         "Supernatural"
       ],
       "synopsis": "The universe of JoJo's Bizarre Adventure is a reflection of the real world with the added existence of supernatural forces and beings. In this setting, some people are capable of transforming their inner spiritual power into a Stand (スタンド, Sutando); another significant form of energy is Hamon (波紋, \"Ripple\"), a martial arts technique that allows its user to focus bodily energy into sunlight via controlled breathing. The narrative of JoJo's Bizarre Adventure is split into parts with independent stories and different characters. Each of the series' protagonists is a member of the Joestar family, whose mainline descendants possess a star-shaped birthmark above their left shoulder blade and a name that can be abbreviated to the titular \"JoJo\".[a] The first six parts take place within a single continuity whose generational conflict stems from the rivalry between Jonathan Joestar and Dio Brando, while the latter two parts take place in an alternate universe where the Joestar family tree is heavily altered.",
-      "copise": 1
+      "borrowed": 2,
+      "copies": 0
     },
     {
       "id": 2,
-      "title": "Chainsaw man",
+      "title": "chainsaw man",
       "img": "https://kbimages1-a.akamaihd.net/9b90e481-4b79-47e1-a919-3d0a46752177/1200/1200/False/chainsaw-man-vol-1.jpg",
       "author": "Tatsuki Fujimoto",
       "publisher": "Shueisha",
@@ -26,11 +27,12 @@
         "Dark fantasy"
       ],
       "synopsis": "In the world of Chainsaw Man, Devils are born from human fears. Devils are usually dangerous and malevolent, their power is proportional to how strongly their correspondent fear is incited in the collective human consciousness. However, humans can form contracts with them to use their powers. Individuals who specialize in hunting and employing Devils are called Devil hunters. Devils originate from Hell, and exist in an endless life cycle between Earth and Hell: they are reborn on Earth when killed in Hell, and vice-versa. Dwelling in Hell are extremely powerful Devils called Primal Fears, which have never been killed. Transit between the two planes appears to be overseen by the Hell Devil.\n\nA Devil may, in certain conditions, inhabit the body of a dead human, gaining some of their memories and personality; such a creature is called a Fiend. Devils who naturally have a human-like appearance are said to be benevolent towards humans.\n\nThe events of the story take place in 1997, in an alternate timeline where the Soviet Union still exists, and many historical events such as the Holocaust appear to have never occurred.",
-      "copise": "100"
+      "borrowed": 1,
+      "copies": 99
     },
     {
       "id": 3,
-      "title": "One Piece",
+      "title": "one piece",
       "img": "https://upload.wikimedia.org/wikipedia/en/9/90/One_Piece%2C_Volume_61_Cover_%28Japanese%29.jpg",
       "author": "Eiichiro Oda",
       "publisher": "Viz Media",
@@ -39,11 +41,12 @@
         "Fantasy"
       ],
       "synopsis": "The series focuses on Monkey D. Luffy, a young man who, inspired by his childhood idol and powerful pirate \"Red Haired\" Shanks, sets off on a journey from the East Blue Sea to find the titular treasure and proclaim himself the King of the Pirates. In an effort to organize his own crew, the Straw Hat Pirates,[Jp 1] Luffy rescues and befriends a swordsman named Roronoa Zoro, and they head off in search of the One Piece. They are joined in their journey by Nami, a navigator and thief; Usopp, a sniper and a pathological liar; and Vinsmoke Sanji, a perverted chef. They acquire a ship named the Going Merry[Jp 2] and engage in confrontations with notorious pirates of the East Blue. As Luffy and his crew set out on their adventures, others join the crew later in the series, including Tony Tony Chopper, a doctor and anthropomorphized reindeer; Nico Robin, an archaeologist and former assassin; Franky, a cyborg shipwright; Brook, a skeletal musician and swordsman; and Jimbei, a fish-man helmsman and former member of the Seven Warlords of the Sea. Once the Going Merry becomes damaged beyond repair, the Straw Hat Pirates acquire a new ship named the Thousand Sunny.[Jp 3] Together, they encounter other pirates, bounty hunters, criminal organizations, revolutionaries, secret agents and soldiers of the corrupt World Government, and various other friends and foes, as they sail the seas in pursuit of their dreams.",
-      "copise": 3
+      "borrowed": 1,
+      "copies": 2
     },
     {
       "id": 4,
-      "title": "One Punch Man",
+      "title": "one punch man",
       "img": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/OnePunchMan_manga_cover.png/220px-OnePunchMan_manga_cover.png",
       "author": "ONE",
       "publisher": "Viz Media",
@@ -53,11 +56,12 @@
         "Superhero"
       ],
       "synopsis": "On a supercontinent Earth, powerful monsters and villains have been wreaking havoc in the cities. In response, the millionaire Agoni creates the Hero Association, which employs superheroes to fight evil. Saitama, an unassociated hero, hails from City Z and performs heroic deeds as a hobby. He has trained himself to the point of being able to defeat any enemy with a single punch, but his unmatched strength has left him with an overwhelming sense of boredom. Saitama eventually becomes a reluctant mentor to Genos, a cyborg seeking revenge against another cyborg who killed his family and destroyed his hometown. Saitama and Genos join the Hero Association, but due to scoring low on the written entry exam, Saitama is placed at a low-entry rank, and his feats remain unnoticed and unappreciated by the public.\n\nThe Hero Association calls all the top heroes to a meeting, informing them that the seer Shibabawa had a vision that the world is in danger before dying. Immediately after, an alien named Boros invades the planet. The heroes fight the invaders outside Boros's ship, while Saitama boards the ship and fights Boros, who notoriously survives more than one punch from Saitama before being defeated. Saitama meets other heroes, such as the martial artist Bang, the esper Blizzard, and King, a hero considered the strongest man on Earth. Monsters also begin to appear at a rising rate. Another growing threat is the rogue martial artist Garo, Bang's former apprentice and self-dubbed \"Hero Hunter\" Garo, who fights and defeats heroes to grow stronger and become a \"monster\".\n\nThe monster influx is revealed to be the doing of the Monster Association, an organization composed of monsters intent on destroying the Hero Association. They attack various cities, kidnap a Hero Association executive's child, and recruit fighters by offering them \"monster cells\", which cause humans to mutate into monsters with extraordinary abilities. Throughout all this, Garo bonds with a child who idolizes heroes, seeks out heroes to battle, and greatly improves his fighting abilities. The Monster Association attempts to recruit him, and kidnaps the child when Garo refuses. Garo enters the Monster Association headquarters in City Z to rescue the child, but is captured. The Hero Association also breaches the headquarters to rescue the executives' child and a chaotic battle ensues, in which City Z is destroyed. The majority of the Monster Association's leaders are slain, but many of the heroes, overconfident in their abilities, are defeated. Garo, having achieved tremendous power, defeats the remaining heroes, before Saitama in turn arrives and defeats him. Despite the objections of the other heroes, Saitama spares Garo's life and lets him flee.\n\nIn the aftermath of the battle, the Hero Association's poor performance leads to public opinion of them plummeting. Several heroes and officials decide to retire or defect to the Neo Heroes, a burgeoning rival group that appears to be more effective in handling the growing monster threats with its larger membership and the leadership of the hero Blue, who claims to be the son of the long-missing Blast.",
-      "copise": 4
+      "borrowed": 0,
+      "copies": 4
     },
     {
       "id": 5,
-      "title": "Demon Slayer: Kimetsu no Yaiba",
+      "title": "demon slayer: kimetsu no yaiba",
       "img": "https://upload.wikimedia.org/wikipedia/en/0/09/Demon_Slayer_-_Kimetsu_no_Yaiba%2C_volume_1.jpg",
       "author": "Koyoharu Gotouge",
       "publisher": "Viz Media",
@@ -67,10 +71,11 @@
         "Martial Arts"
       ],
       "synopsis": "The story takes place in Taishō-era Japan. It follows Tanjiro Kamado and his sister Nezuko Kamado as they seek a cure for Nezuko's demon curse. Tanjiro and Nezuko become entangled in the affairs of a secret society, known as the Demon Slayer Corps, that has been waging a secret war against demons for centuries. The demons are former humans who sold their humanity in exchange for power. They feed on humans and possess supernatural abilities such as super strength, magic, and regeneration. Demons can only be killed if they're decapitated with weapons crafted from an alloy known as Sun Steel, injected with poison extracted from wisteria flowers, or exposed to sunlight. The Demon Slayers, on the other hand, are entirely human; however, they employ special breathing techniques, known as \"Breathing Styles\", which grant them superhuman strength and increased resistance.",
-      "copise": 5
+      "borrowed": 0,
+      "copies": 5
     },
     {
-      "title": "Dragon Ball",
+      "title": "dragon ball",
       "img": "https://upload.wikimedia.org/wikipedia/en/c/c9/DB_Tank%C5%8Dbon.png",
       "author": "Akira Toriyama",
       "publisher": "Shueisha",
@@ -80,11 +85,12 @@
         "martial arts"
       ],
       "synopsis": "Son Goku, a monkey-tailed boy, and Bulma, a teenage girl, travel to find the seven Dragon Balls, which summon the dragon Shenlong to grant the user one wish. Their journey leads to the desert bandit Yamcha, who later becomes an ally; Chi-Chi, whom Goku unknowingly agrees to marry; and Pilaf, an impish man who seeks the Dragon Balls to fulfill his desire to rule the world. Goku undergoes rigorous training regimes under the martial arts master Kame-Sen'nin to fight in the Tenkaichi Budōkai (天下一武道会, lit. \"Strongest Under the Heavens Martial Arts Tournament\"). He becomes friends with a monk named Kuririn, his training partner and initial rival. After the tournament, Goku searches for the Dragon Ball his grandfather left him and almost single-handedly defeats the Red Ribbon Army and their hired assassin, Taopaipai. Goku then reunites with his friends to defeat the fortune teller Baba Uranai's fighters and use her to find the last Dragon Ball in order to revive a friend killed by Taopaipai.",
-      "copise": "100",
+      "copies": "100",
+      "borrowed": 0,
       "id": 6
     },
     {
-      "title": "Naruto",
+      "title": "naruto",
       "img": "https://upload.wikimedia.org/wikipedia/en/9/94/NarutoCoverTankobon1.jpg",
       "author": "Masashi Kishimoto",
       "publisher": "Shueisha",
@@ -94,11 +100,12 @@
         "fantasy comedy"
       ],
       "synopsis": "When serialization began, Kishimoto decided the ending would feature a fight between two characters: Naruto and Sasuke. However, the writer felt the two were not equals as the former was not a victim of war like the latter whose family was killed to stop a possible civil war.[18] Nagato's arc paved the way for the ending of Naruto to occur. Nagato stood out as a villain due to suffering war and killing Naruto's mentor Jiraiya. Understanding the fears of war, Naruto's characterization was made more complex for him to experience the Fourth Great Shinobi War. These events end with Naruto forgiving Sasuke as he had forgiven Nagato in the final battle.[15]",
-      "copise": "100",
+      "copies": "100",
+      "borrowed": 0,
       "id": 7
     },
     {
-      "title": "Fairy Tail",
+      "title": "fairy tail",
       "img": "https://kbimages1-a.akamaihd.net/59a6bf0e-a688-4ded-91a5-04d7552dd323/1200/1200/False/fairy-tail-4-5.jpg",
       "author": "Hiro Mashima",
       "publisher": "Kodansha",
@@ -107,11 +114,12 @@
         "Fantasy"
       ],
       "synopsis": "The world of Earth-land is home to numerous guilds where wizards[a] apply their magic for paid job requests. Natsu Dragneel, a Dragon Slayer wizard from the Fairy Tail guild, explores the Kingdom of Fiore in search of his missing adoptive father, the dragon Igneel. During his journey, he befriends a young celestial wizard named Lucy Heartfilia and invites her to join Fairy Tail. Lucy forms a team with Natsu and his cat-like Exceed partner, Happy, which is joined by other guild members: Gray Fullbuster, an ice wizard; Erza Scarlet, a magical knight; and Wendy Marvell and Carla, another Dragon Slayer and Exceed duo. The team embark on numerous missions together, which include subduing criminals, illegal dark guilds, and ancient Etherious demons created by Zeref, a wizard cursed with immortality and deadly power.",
-      "copise": "100",
+      "copies": "100",
+      "borrowed": 0,
       "id": 9
     },
     {
-      "title": "Gintama",
+      "title": "gintama",
       "img": "https://comicvine.gamespot.com/a/uploads/scale_small/6/67663/7022689-77.jpg",
       "author": "Hideaki Sorachi",
       "publisher": "NA ‎Viz Media",
@@ -120,7 +128,8 @@
         "Science fiction comedy‎"
       ],
       "synopsis": "The story is set in an alternate-history late-Edo period, where humanity is attacked by aliens called \"amanto\" (天人, \"Sky People\"). Edo Japan's samurai fights to defend Earth, but the shōgun cowardly surrenders when he realizes the aliens' power. He agrees to an unequal contract with the aliens, placing a ban on carrying swords in public and allowing the invaders to enter the country. The samurai's swords are confiscated and the Tokugawa bakufu (shogunate) becomes a puppet government.",
-      "copise": "100",
+      "copies": "100",
+      "borrowed": 0,
       "id": 10
     },
     {
@@ -134,7 +143,8 @@
         "Science fiction"
       ],
       "synopsis": "Beginning in April 5738 AD, it's been over 3,700 years since a mysterious flash petrified nearly all human life. A 15-year-old genius named Senku Ishigami is suddenly revived to find himself in a world where all traces of human civilization have been eroded by time. Senku sets up a base-camp and begins to study the petrified humans in order to determine the cause of the event, as well as a cure.",
-      "copise": "100",
+      "copies": "100",
+      "borrowed": 0,
       "id": 11
     },
     {
@@ -147,11 +157,12 @@
         "supernatural"
       ],
       "synopsis": "Ichigo Kurosaki is a teenager from Karakura Town who can see ghosts, a talent which lets him meet supernatural trespasser Rukia Kuchiki who enters Ichigo's room in search of a Hollow, a kind of monstrous lost soul who can harm both ghosts and humans. Rukia is one of the Soul Reapers (死神, Shinigami, literally 'Death Gods'), soldiers trusted with ushering the souls of the dead from the World of the Living to the Soul Society (尸魂界 (ソウル・ソサエティ), lit. \"Dead Spirit World\")—the afterlife realm from which she originates—and with fighting Hollows. When she is severely wounded defending Ichigo from a Hollow she is pursuing, Rukia transfers her powers to Ichigo so that he may fight in her stead while she recovers her strength. Rukia is thereby trapped in an ordinary human body, and must advise Ichigo as he balances the demands of his substitute Soul Reaper duties and attending high school. For aid in hunting the Hollows, the pair ally with a trio of other spiritually empowered teenagers: Ichigo's high school classmate Orihime Inoue, best friend Yasutora \"Chad\" Sado and the Quincy—humans who have the ability to control spirit particles—Uryū Ishida.",
-      "copise": "100",
+      "copies": "100",
+      "borrowed": 0,
       "id": 12
     },
     {
-      "title": "Jujutsu Kaisen",
+      "title": "jujutsu kaisen",
       "img": "https://upload.wikimedia.org/wikipedia/en/thumb/4/46/Jujutsu_kaisen.jpg/220px-Jujutsu_kaisen.jpg",
       "author": "Gege Akutami",
       "publisher": "Shueisha",
@@ -161,11 +172,12 @@
         "supernatural"
       ],
       "synopsis": "In Jujutsu Kaisen, all living beings emanate an energy called Cursed Energy,[Jp. 1] which arises from negative emotions that naturally flow throughout the body. Normal people cannot control this flow in their bodies. As a result, they continually lose Cursed Energy, resulting in the birth of Curses,[Jp. 2] a race of spiritual beings whose primary desire is to bring harm to humanity. These curses are shown as gruesome monsters.",
-      "copise": "100",
+      "copies": 98,
+      "borrowed": 2,
       "id": 13
     },
     {
-      "title": "Miss Kobayashi's Dragon Maid",
+      "title": "miss kobayashi's dragon maid",
       "img": "https://upload.wikimedia.org/wikipedia/en/thumb/2/2d/Miss_Kobayashi%27s_Dragon_Maid%2C_volume_1.jpg/220px-Miss_Kobayashi%27s_Dragon_Maid%2C_volume_1.jpg",
       "author": "Coolkyousinnjya",
       "publisher": "Futabasha",
@@ -175,11 +187,12 @@
         "fantasy"
       ],
       "synopsis": "As office worker and programmer Kobayashi gets ready for work, she is greeted by a large dragon right outside her front door. The dragon immediately transforms into a human girl in a maid outfit, and introduces herself as Tohru. It turns out, that during a drunken excursion into the mountains the night before, Kobayashi had encountered the dragon, who claimed to have come from another world. Subsequently, Kobayashi had removed a holy sword from Tohru's back, earning her gratitude. With Tohru having no place to stay, Kobayashi offers to let the dragon stay at her home and become her personal maid, to which she agrees.",
-      "copise": "100",
+      "copies": "100",
+      "borrowed": 0,
       "id": 14
     },
     {
-      "title": "Himouto! Umaru-chan",
+      "title": "himouto! umaru-chan",
       "img": "https://upload.wikimedia.org/wikipedia/en/thumb/1/1e/Him%C5%8Dto%21_Umaru-chan_volume_1_cover.jpg/220px-Him%C5%8Dto%21_Umaru-chan_volume_1_cover.jpg",
       "author": "Sankaku Head",
       "publisher": "Shueisha",
@@ -188,128 +201,193 @@
         "slice of life"
       ],
       "synopsis": "Umaru Doma is a high school girl who lives with her older brother Taihei. At school, Umaru appears to be the ideal student with good looks, top grades and many talents. However, she transforms into a kid-sized layabout and spends time at home feeding her video game and food addiction, much to Taihei's dismay. Throughout the series, Umaru uses her alternative personality to make friends with others, while at home she throws tantrums about Taihei not buying her things.",
-      "copise": "100",
+      "copies": "100",
+      "borrowed": 0,
       "id": 15
+    },
+    {
+      "title": "that time i got reincarnated as a slime",
+      "img": "https://images-na.ssl-images-amazon.com/images/I/812xPmV8QLL.jpg",
+      "author": "Fuse",
+      "publisher": "Shōsetsuka ni Narō",
+      "genres": [
+        "fantasy",
+        "isekai"
+      ],
+      "synopsis": "Satoru Mikami is an ordinary 37-year-old corporate worker living in Tokyo. He is almost content with his monotonous life, despite the fact that he doesn't have a girlfriend. During a casual encounter with his colleague, an assailant pops out of nowhere and stabs him. While succumbing to his injuries, a mysterious voice echoes in his mind and recites a series of commands which he could not make sense of.",
+      "copies": "100",
+      "borrowed": 0,
+      "id": 16
+    },
+    {
+      "title": "tokyo ghoul",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e5/Tokyo_Ghoul_volume_1_cover.jpg/220px-Tokyo_Ghoul_volume_1_cover.jpg",
+      "author": "Sui Ishida",
+      "publisher": "Shueisha",
+      "genres": [
+        "dark fantasy",
+        "supernatural thriller"
+      ],
+      "synopsis": "The story follows Ken Kaneki, a student who barely survives a deadly encounter with Rize Kamishiro, his date who reveals herself as a ghoul and tries to eat him. He is taken to the hospital in critical condition. After recovering, Kaneki discovers that he underwent a surgery that transformed him into a half-ghoul. This was accomplished because some of Rize's organs were transferred into his body, and now, like normal ghouls, he must consume human flesh to survive. Ghouls who run a coffee shop called \"Anteiku\" (あんていく) take him in and teach him to deal with his new life as a half-ghoul. Some of his daily struggles include fitting into the ghoul society, as well as keeping his identity hidden from his human companions, especially from his best friend, Hideyoshi Nagachika.",
+      "copies": "12",
+      "borrowed": 0,
+      "id": 17
+    },
+    {
+      "title": "pet shop of horrors",
+      "img": "https://upload.wikimedia.org/wikipedia/en/thumb/3/32/Pet_Shop_of_Horrors_%28DVD_cover_-_US_Special_Edition_%29.jpg/220px-Pet_Shop_of_Horrors_%28DVD_cover_-_US_Special_Edition_%29.jpg",
+      "author": "Matsuri Akino",
+      "publisher": "Ohzora Publishing",
+      "genres": [
+        "Horror",
+        "mystery"
+      ],
+      "synopsis": "\"Count D\" is the mysterious caretaker of a pet shop in Los Angeles Chinatown. Each of D's rare pets, which all have strangely humanoid appearances, comes with a contract with three major points. These points differ for each animal sold (although each animal's contract includes not showing it to anyone), and breaking this contract usually results in dire (and sometimes disturbing) consequences for the buyer, for which the pet shop claims no liability.",
+      "copies": 311,
+      "borrowed": 1,
+      "id": 18
     }
   ],
   "visitors": [
     {
       "id": 1,
-      "name": "Jennifer G. Speirs",
-      "phone": "609-613-4030"
+      "name": "jennifer g. speirs",
+      "phone": "609-613-4030",
+      "borrowRecord": [
+        "jojo's bizarre adventure",
+        "one piece"
+      ]
     },
     {
       "id": 2,
-      "name": "Mercedes W. Scott",
-      "phone": "312-970-8921"
+      "name": "mercedes w. scott",
+      "phone": "312-970-8921",
+      "borrowRecord": [
+        "chainsaw man"
+      ]
     },
     {
       "id": 3,
-      "name": "Frank G. Pearce",
-      "phone": "502-464-0615"
+      "name": "frank g. pearce",
+      "phone": "502-464-0615",
+      "borrowRecord": []
     },
     {
-      "name": "Jana E. Stevens",
+      "name": "jana e. stevens",
       "phone": "901-481-6039",
-      "id": 4
+      "id": 4,
+      "borrowRecord": []
     },
     {
-      "name": "Jennifer E. Burson",
+      "name": "jennifer e. burson",
       "phone": "406-499-1965",
-      "id": 5
+      "id": 5,
+      "borrowRecord": []
     },
     {
-      "name": "James J. McLean",
+      "name": "james j. mcLean",
       "phone": "703-561-5866",
-      "id": 6
+      "id": 6,
+      "borrowRecord": [
+        "jojo's bizarre adventure"
+      ]
     },
     {
-      "name": "Merlin A. May",
+      "name": "merlin a. may",
       "phone": "321-284-7525",
-      "id": 7
+      "id": 7,
+      "borrowRecord": []
     },
     {
-      "name": "Keith J. Conner",
+      "name": "keith j. conner",
       "phone": "412-961-1593",
-      "id": 8
+      "id": 8,
+      "borrowRecord": []
     },
     {
-      "name": "Teresa M. Hopkins",
+      "name": "teresa m. hopkins",
       "phone": "818-974-2158",
-      "id": 9
+      "id": 9,
+      "borrowRecord": [
+        "jujutsu kaisen",
+        "jujutsu kaisen",
+        "pet shop of horrors"
+      ]
     },
     {
-      "name": "Pauline S. Parks",
+      "name": "pauline s. parks",
       "phone": "724-860-7919",
-      "id": 10
+      "id": 10,
+      "borrowRecord": []
     },
     {
-      "name": "Stacy B. Holle",
+      "name": "stacy b. holle",
       "phone": "316-616-7188",
-      "id": 11
+      "id": 11,
+      "borrowRecord": []
     }
   ],
   "cards": [
     {
-      "id": 1,
-      "visitor": "Jennifer G. Speirs",
-      "book": "chainsaw man",
-      "bDate": "05/08/2021",
-      "rDate": "05/08/2021 (04:57 pm)"
-    },
-    {
-      "visitor": "Merlin A. May",
-      "book": "One Punch Man",
-      "bDate": "05/08/2021 01:17 pm",
-      "rDate": "",
-      "id": 2
-    },
-    {
-      "visitor": "Mercedes W. Scott",
-      "book": "Jujutsu Kaisen",
-      "bDate": "05/08/2021 01:22 pm",
-      "rDate": "",
+      "visitorId": 1,
+      "visitor": "jennifer g. speirs",
+      "bookId": 1,
+      "book": "jojo's bizarre adventure",
+      "bDate": "06/08/2021 (10:50 am)",
+      "rDate": "06/08/2021 (11:32 am)",
       "id": 3
     },
     {
-      "visitor": "James J. McLean",
-      "book": "JoJo's Bizarre Adventure",
-      "bDate": "05/08/2021 (01:26 pm)",
+      "visitorId": 2,
+      "visitor": "mercedes w. scott",
+      "bookId": 2,
+      "book": "chainsaw man",
+      "bDate": "06/08/2021 (10:53 am)",
       "rDate": "",
       "id": 4
     },
     {
-      "visitor": "Pauline S. Parks",
-      "book": "Demon Slayer: Kimetsu no Yaiba",
-      "bDate": "05/08/2021 (01:34 pm)",
+      "visitorId": 1,
+      "visitor": "jennifer g. speirs",
+      "bookId": 3,
+      "book": "one piece",
+      "bDate": "06/08/2021 (11:42 am)",
       "rDate": "",
       "id": 5
     },
     {
-      "visitor": "Frank G. Pearce",
-      "book": "bleach",
-      "bDate": "05/08/2021 (01:34 pm)",
+      "visitorId": 9,
+      "visitor": "teresa m. hopkins",
+      "bookId": 13,
+      "book": "jujutsu kaisen",
+      "bDate": "06/08/2021 (11:42 am)",
       "rDate": "",
       "id": 6
     },
     {
-      "visitor": "Teresa M. Hopkins",
-      "book": "One Piece",
-      "bDate": "05/08/2021 (01:35 pm)",
+      "visitorId": 9,
+      "visitor": "teresa m. hopkins",
+      "bookId": 13,
+      "book": "jujutsu kaisen",
+      "bDate": "06/08/2021 (11:42 am)",
       "rDate": "",
       "id": 7
     },
     {
-      "visitor": "Jana E. Stevens",
-      "book": "dr. stone",
-      "bDate": "05/08/2021 (03:31 pm)",
+      "visitorId": 9,
+      "visitor": "teresa m. hopkins",
+      "bookId": 18,
+      "book": "pet shop of horrors",
+      "bDate": "06/08/2021 (11:42 am)",
       "rDate": "",
       "id": 8
     },
     {
-      "visitor": "Keith J. Conner",
-      "book": "dr. stone",
-      "bDate": "05/08/2021 (04:20 pm)",
+      "visitorId": 6,
+      "visitor": "james j. mcLean",
+      "bookId": 1,
+      "book": "jojo's bizarre adventure",
+      "bDate": "06/08/2021 (03:33 pm)",
       "rDate": "",
       "id": 9
     }
