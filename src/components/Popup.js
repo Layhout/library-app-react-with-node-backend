@@ -214,7 +214,7 @@ const NewCardForm = ({ closePopup, addCard }) => {
         const book = subIdName(selectedBook);
         const res = await axios.post("http://localhost:1000/cards", { visitorId: visitor.id, visitor: visitor.text, bookId: book.id, book: book.text, bDate: formatedToday(), rDate: "" });
         const res1 = await axios.get(`http://localhost:1000/visitors/${visitor.id}`);
-        await axios.patch(`http://localhost:1000/visitors/${visitor.id}`, { borrowRecord: res1.data.borrowRecord.concat(book.text) });
+        await axios.patch(`http://localhost:1000/visitors/${visitor.id}`, { borrowRecord: res1.data.borrowRecord.concat(book.text), borrow: ++res1.data.borrow });
         const res2 = await axios.get(`http://localhost:1000/books/${book.id}`);
         await axios.patch(`http://localhost:1000/books/${book.id}`, { copies: --res2.data.copies, borrowed: ++res2.data.borrowed });
         addCard(prev => prev.concat(res.data));

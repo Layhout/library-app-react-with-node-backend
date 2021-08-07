@@ -187,8 +187,8 @@
         "fantasy"
       ],
       "synopsis": "As office worker and programmer Kobayashi gets ready for work, she is greeted by a large dragon right outside her front door. The dragon immediately transforms into a human girl in a maid outfit, and introduces herself as Tohru. It turns out, that during a drunken excursion into the mountains the night before, Kobayashi had encountered the dragon, who claimed to have come from another world. Subsequently, Kobayashi had removed a holy sword from Tohru's back, earning her gratitude. With Tohru having no place to stay, Kobayashi offers to let the dragon stay at her home and become her personal maid, to which she agrees.",
-      "copies": "100",
-      "borrowed": 0,
+      "copies": 99,
+      "borrowed": 1,
       "id": 14
     },
     {
@@ -255,8 +255,10 @@
       "phone": "609-613-4030",
       "borrowRecord": [
         "jojo's bizarre adventure",
-        "one piece"
-      ]
+        "one piece",
+        "miss kobayashi's dragon maid"
+      ],
+      "borrow": 3
     },
     {
       "id": 2,
@@ -264,25 +266,29 @@
       "phone": "312-970-8921",
       "borrowRecord": [
         "chainsaw man"
-      ]
+      ],
+      "borrow": 1
     },
     {
       "id": 3,
       "name": "frank g. pearce",
       "phone": "502-464-0615",
-      "borrowRecord": []
+      "borrowRecord": [],
+      "borrow": 0
     },
     {
       "name": "jana e. stevens",
       "phone": "901-481-6039",
       "id": 4,
-      "borrowRecord": []
+      "borrowRecord": [],
+      "borrow": 0
     },
     {
       "name": "jennifer e. burson",
       "phone": "406-499-1965",
       "id": 5,
-      "borrowRecord": []
+      "borrowRecord": [],
+      "borrow": 0
     },
     {
       "name": "james j. mcLean",
@@ -290,19 +296,22 @@
       "id": 6,
       "borrowRecord": [
         "jojo's bizarre adventure"
-      ]
+      ],
+      "borrow": 1
     },
     {
       "name": "merlin a. may",
       "phone": "321-284-7525",
       "id": 7,
-      "borrowRecord": []
+      "borrowRecord": [],
+      "borrow": 0
     },
     {
       "name": "keith j. conner",
       "phone": "412-961-1593",
       "id": 8,
-      "borrowRecord": []
+      "borrowRecord": [],
+      "borrow": 0
     },
     {
       "name": "teresa m. hopkins",
@@ -312,19 +321,22 @@
         "jujutsu kaisen",
         "jujutsu kaisen",
         "pet shop of horrors"
-      ]
+      ],
+      "borrow": 3
     },
     {
       "name": "pauline s. parks",
       "phone": "724-860-7919",
       "id": 10,
-      "borrowRecord": []
+      "borrowRecord": [],
+      "borrow": 0
     },
     {
       "name": "stacy b. holle",
       "phone": "316-616-7188",
       "id": 11,
-      "borrowRecord": []
+      "borrowRecord": [],
+      "borrow": 0
     }
   ],
   "cards": [
@@ -390,6 +402,15 @@
       "bDate": "06/08/2021 (03:33 pm)",
       "rDate": "",
       "id": 9
+    },
+    {
+      "visitorId": 1,
+      "visitor": "jennifer g. speirs",
+      "bookId": 14,
+      "book": "miss kobayashi's dragon maid",
+      "bDate": "07/08/2021 (08:33 am)",
+      "rDate": "",
+      "id": 10
     }
   ]
 }
