@@ -1,9 +1,10 @@
-const express = require("express");
-const morgan = require("morgan");
-const mongoose = require("mongoose");
-const cors = require("cors");
-require("dotenv/config");
-const bookRoutes = require("./routes/bookRoutes");
+import express from "express";
+import morgan from "morgan";
+import mongoose from "mongoose";
+import cors from "cors";
+import "dotenv/config";
+import bookRoutes from "./routes/bookRoutes.js";
+import visitorRouters from "./routes/visitorRouters.js"
 
 // create express app
 const app = express();
@@ -16,22 +17,15 @@ mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology
     .catch((err) => console.log(err));
 
 // middleware
-app.use(cors);
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(morgan("tiny"));
+app.use(morgan("dev"));
 
 // routes
-app.get("/books", (req, res) => {
-    console.log("hello world");
-    res.send("hello world");
-});
+app.use("/books", bookRoutes);
+app.use("/visitors", visitorRouters);
 
-app.get("/", (req, res) => {
-    console.log("hello world");
-    res.send("hello world");
-});
-
-app.listen(3000, () => {
-    console.log("listen on port 3000");
+app.listen(1000, () => {
+    console.log("listen on port 1000");
 });

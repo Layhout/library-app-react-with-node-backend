@@ -33,19 +33,36 @@ const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!edit) {
-            const res = await axios.get(`http://localhost:1000/books?title=${title}`);
-            if (res.data.length === 0) {
-                const res = await axios.post("http://localhost:1000/books", { title: title.trim(), img: imgUrl.trim(), author: author.trim(), publisher: publisher.trim(), genres, synopsis: des, copies, borrowed: 0 });
+            try {
+                const res = await axios.post("http://localhost:1000/books/add", { title, img: imgUrl, author, publisher, genres, synopsis: des, copies, borrowed: 0 });
                 addBook(prev => prev.concat(res.data));
                 closePopup(prev => !prev);
-            } else {
-                closePopup(prev => !prev);
-                alert(`Operation fail because ${title} already exists in the DataBase.`);
+                alert("New book added.");
+            } catch (err) {
+                if (err.response.status === 409) {
+                    alert(`Add book fail. ${title} already exists in DataBase. Please edit it instead.`);
+                    closePopup(prev => !prev);
+                } else {
+                    alert("Server failure " + err.message);
+                    closePopup(prev => !prev);
+                }
             }
+
         } else {
-            const res = await axios.patch(`http://localhost:1000/books/${b2Edit.id}`, { title: title.trim(), img: imgUrl.trim(), author: author.trim(), publisher: publisher.trim(), genres, synopsis: des, copies });
-            editedBook(res.data);
-            closePopup(prev => !prev);
+            try {
+                const res = await axios.patch("http://localhost:1000/books/edit", { id: b2Edit._id, title, img: imgUrl, author, publisher, genres, synopsis: des, copies });
+                editedBook(res.data);
+                closePopup(prev => !prev);
+                alert("Book updated.");
+            } catch (err) {
+                if (err.response.status === 400) {
+                    alert("Edit fail. Something's wrong and it not the server.");
+                    closePopup(prev => !prev);
+                } else {
+                    alert("Server failure " + err.message);
+                    closePopup(prev => !prev);
+                }
+            }
         }
     }
 
@@ -71,9 +88,9 @@ const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
             </div>
             <div className="input-form">
                 <h1>{popupTitle}</h1>
-                <form action="" onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <label htmlFor="title">Title: </label>
-                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value.toLowerCase())} placeholder="Title of the book" required />
+                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title of the book" required />
                     <div style={{ display: "flex", gap: "20px" }}>
                         <div>
                             <label htmlFor="title">Author: </label>
@@ -106,7 +123,7 @@ const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
                     <label htmlFor="title" >Image Url: </label>
                     <input type="text" onChange={(e) => setImgUrl(e.target.value)} placeholder="Please use image link from Google..." />
                     <div className="actions">
-                        <button className="btn" style={{ backgroundColor: "lightgray", color: "black" }} onClick={() => closePopup(prev => !prev)}>Cancel</button>
+                        <button className="btn" type="button" style={{ backgroundColor: "lightgray", color: "black" }} onClick={() => closePopup(prev => !prev)}>Cancel</button>
                         <button className="btn" type="submit" style={{ backgroundColor: "#52c41a" }} >Save</button>
                     </div>
                 </form>
@@ -119,8 +136,19 @@ const DeleteBook = ({ closePopup, bTitle, bId }) => {
     const history = useHistory();
 
     const handleConfirm = async (id) => {
-        await axios.delete(`http://localhost:1000/books/${id}`);
-        history.push("/");
+        try {
+            await axios.delete(`http://localhost:1000/books/book/${id}`);
+            alert("Delete Successfully");
+            history.push("/");
+        } catch (err) {
+            if (err.response.status === 404) {
+                alert("This book dosen't exist to be deleted");
+                history.push("/");
+            } else {
+                alert(err.message);
+                history.push("/");
+            }
+        }
     }
 
     return (
@@ -149,20 +177,36 @@ const NewVisitorForm = ({ closePopup, addVisitor, edit, v2Edit, updVS, i }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await axios.get(`http://localhost:1000/visitors?fname=${fname}`)
         if (!edit) {
-            if (res.data === 0) {
-                const res = await axios.post("http://localhost:1000/visitors", { name: fname, phone: pNum, borrowRecord: [] });
+            try {
+                const res = await axios.post("http://localhost:1000/visitors/add", { name: fname, phone: pNum, borrowRecord: [] });
                 addVisitor(prev => prev.concat(res.data));
                 closePopup(prev => !prev);
-            } else {
-                alert(`Operation fail because ${fname} already exists in the DataBase!`);
-                closePopup(prev => !prev);
+                alert("New visitor added.")
+            } catch (err) {
+                if (err.response.status === 409) {
+                    alert(`Add visitor fail. ${fname} already exists in DataBase.`);
+                    return;
+                } else {
+                    alert("Server failure " + err.message);
+                    closePopup(prev => !prev);
+                }
             }
         } else {
-            const res = await axios.patch(`http://localhost:1000/visitors/${v2Edit.id}`, { name: fname, phone: pNum });
-            updVS(i, res.data);
-            closePopup(prev => !prev);
+            try {
+                const res = await axios.patch("http://localhost:1000/visitors/edit", { id: v2Edit._id, name: fname, phone: pNum });
+                updVS(i, res.data);
+                closePopup(prev => !prev);
+                alert("Update Successfully")
+            } catch (err) {
+                if (err.response.status === 400) {
+                    alert("Update fail.")
+                    closePopup(prev => !prev);
+                } else {
+                    alert("Server failure " + err.message);
+                    closePopup(prev => !prev);
+                }
+            }
         }
     }
 
@@ -173,9 +217,9 @@ const NewVisitorForm = ({ closePopup, addVisitor, edit, v2Edit, updVS, i }) => {
                 <label htmlFor="">Full Name:</label>
                 <input type="text" value={fname} onChange={(e) => setFname(e.target.value.toLowerCase())} placeholder="First name and last name" required />
                 <label htmlFor="">Phone:</label>
-                <input type="number" value={pNum} onChange={(e) => setPNum(e.target.value)} placeholder="Phone number" required />
+                <input type="text" value={pNum} onChange={(e) => setPNum(e.target.value)} placeholder="Phone number" required />
                 <div style={{ display: "flex", justifyContent: "center", marginTop: "20px", gap: "20px" }}>
-                    <button className="btn" style={{ backgroundColor: "lightgrey", color: "black" }} onClick={() => closePopup(prev => !prev)}>Cancel</button>
+                    <button className="btn" type="button" style={{ backgroundColor: "lightgrey", color: "black" }} onClick={() => closePopup(prev => !prev)}>Cancel</button>
                     <button className="btn" type="submit" style={{ backgroundColor: "#52c41a" }}>Save</button>
                 </div>
             </form>

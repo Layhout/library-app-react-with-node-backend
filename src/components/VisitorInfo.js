@@ -8,7 +8,7 @@ const VisitorInfo = ({ visitor, updVS, i }) => {
     return (
         <li className="visitorInfo">
             <div className="list-info">
-                {visitor.id}
+                {visitor._id.substr(-6)}
             </div>
             <div className="list-info">
                 {visitor.name}

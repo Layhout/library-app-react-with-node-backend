@@ -9,35 +9,39 @@ const Visitors = () => {
     const [visitorState, setVisitorState] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [btnAddVisitor, setBtnAddVisitor] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [errMsg, setErrMsg] = useState("")
 
     const fetchVisitor = async () => {
-        const res = await axios.get("http://localhost:1000/visitors");
-        return res.data;
+        try {
+            const res = await axios.get("http://localhost:1000/visitors");
+            return res.data;
+        } catch (err) {
+            throw err;
+        }
     }
 
     useEffect(() => {
         fetchVisitor().then((data) => {
             setVisitorState(data);
             setIsLoading(false);
+        }).catch((err) => {
+            setIsLoading(false);
+            setIsError(true);
+            setErrMsg("Server failure: " + err.message);
         })
     }, [])
 
     const sortVisitor = async (by) => {
         const allVisitors = await fetchVisitor();
-        if (by === "name") {
-            setVisitorState(allVisitors.sort((a, b) => (a[by].toLowerCase() < b[by].toLowerCase()) ? -1 : 1));
-        } else {
-            setVisitorState(allVisitors.sort((a, b) => (a[by] < b[by]) ? -1 : 1));
-        }
+        setVisitorState(allVisitors.sort((a, b) => (a[by] < b[by]) ? -1 : 1));
     }
 
     const searchVisitor = async (term) => {
         const allVisitors = await fetchVisitor();
-        allVisitors.sort((a, b) => (a["name"].toLowercase() < b["name"].toLowercase()) ? -1 : 1);
-        setVisitorState(allVisitors.filter((visitor => {
-            const tVName = visitor.name.toLowerCase();
-            return tVName.includes(term.toLowerCase());
-        })));
+        setVisitorState(allVisitors.filter(visitor => {
+            return visitor.name.includes(term.toLowerCase());
+        }));
     }
 
     const updVisitorState = (i, editedVisitor) => {
@@ -59,10 +63,12 @@ const Visitors = () => {
                     <h1>Edit</h1>
                 </div>
                 <div className="list-body">
-                    {isLoading ? <h2 style={{ textAlign: "center", marginTop: "30px" }}>Loading...</h2> :
+                    {isLoading && <h2 style={{ textAlign: "center", marginTop: "30px" }}>Loading...</h2>}
+                    {isError && <h2 style={{ textAlign: "center", marginTop: "30px" }}>{errMsg}</h2>}
+                    {
                         <ul>
                             {visitorState.map((vs, k) => (
-                                <VisitorInfo key={vs.id} visitor={vs} updVS={updVisitorState} i={k} />
+                                <VisitorInfo key={vs._id} visitor={vs} updVS={updVisitorState} i={k} />
                             ))}
                         </ul>
                     }

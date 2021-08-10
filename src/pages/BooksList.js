@@ -10,21 +10,28 @@ import ActionsBar from "../components/ActionsBar"
 const BookList = () => {
     const [btnAddBook, setBtnAddBook] = useState(false);
     const [booksState, setBooksState] = useState([]);
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
+    const [errMsg, setErrMsg] = useState("")
 
     const fetchBooks = async () => {
-        const res = await axios.get("http://localhost:1000/books");
-        return res.data;
+        try {
+            const { data } = await axios.get("http://localhost:1000/books");
+            return data;
+        } catch (err) {
+            throw err;
+        }
     }
 
     useEffect(() => {
         fetchBooks().then((data) => {
-            data.sort((a, b) => (a["title"] < b["title"]) ? -1 : 1)
             setBooksState(data);
             setIsLoading(false);
-        }).catch((err) => {
-            console.log(err);
-        });
+        }).catch(err => {
+            setIsLoading(false);
+            setIsError(true);
+            setErrMsg("Server Failure: " + err.message);
+        })
     }, []);
 
     const sortBook = async (by) => {
@@ -38,7 +45,6 @@ const BookList = () => {
 
     const searchBook = async (term) => {
         const allBooks = await fetchBooks();
-        allBooks.sort((a, b) => (a["title"] < b["title"]) ? -1 : 1);
         setBooksState(allBooks.filter((book) => {
             return book.title.includes(term);
         }))
@@ -55,17 +61,19 @@ const BookList = () => {
             <section>
                 <ActionsBar sort={sortBook} search={searchBook} setBtnAdd={setBtnAddBook} sortOp={["title", "author", "copies"]} searchBy="Search By Title" btnName="add new book" />
             </section>
-            {isLoading ? <h2 style={{ textAlign: "center", marginTop: "30px" }}>Loading...</h2> : <section>
+            {isLoading && <h2 style={{ textAlign: "center", marginTop: "30px" }}>Loading...</h2>}
+            {isError && <h2 style={{ textAlign: "center", marginTop: "30px" }}>{errMsg}</h2>}
+            <section>
                 <Masonry breakpointCols={breakpoints} className="my-masonry-grid" columnClassName="my-masonry-grid_column" >
                     {booksState.map((book) => (
-                        <Link key={book.id} to={`/books/${book.id}`}>
+                        <Link key={book._id} to={`/books/${book._id}`}>
                             <div style={{ marginBottom: "15px" }}>
                                 <BookCard book={book} />
                             </div>
                         </Link>
                     ))}
                 </Masonry>
-            </section>}
+            </section>
             {btnAddBook && <Popup type="newBook" closePopup={setBtnAddBook} addBook={setBooksState} />}
         </main>
     )
