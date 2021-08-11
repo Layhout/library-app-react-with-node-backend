@@ -52,10 +52,7 @@ export const addBook = async (req, res) => {
         }
         const newBook = new Book({ ...req.body, title: req.body.title.trim().toLowerCase(), img: req.body.img.trim(), author: req.body.author.trim().toLowerCase(), publisher: req.body.publisher.trim().toLowerCase() });
         const addedBook = await newBook.save();
-        if (addedBook) {
-            res.status(201).json(addedBook);
-            return;
-        }
+        res.status(201).json(addedBook);
     } catch (err) {
         console.log("Server fail:", err.message);
         res.status(500).json({ errMsg: err.message });
@@ -70,6 +67,38 @@ export const editBook = async (req, res) => {
             return;
         }
         res.status(400).json({ msg: "Edit fail. Something's wrong" });
+    } catch (err) {
+        console.log("Server fail:", err.message);
+        res.status(500).json({ errMsg: err.message });
+    }
+}
+
+export const updBorrow = async (req, res) => {
+    try {
+        const foundB = await Book.findById(req.body.id);
+        await Book.findByIdAndUpdate(req.body.id, { borrowed: ++foundB.borrowed, copies: --foundB.copies }, { useFindAndModify: false });
+        res.status(200).json(null);
+    } catch (err) {
+        console.log("Server fail:", err.message);
+        res.status(500).json({ errMsg: err.message });
+    }
+}
+
+export const returnBook = async (req, res) => {
+    try {
+        const returnedB = await Book.findById(req.body.id);
+        await Book.findByIdAndUpdate(req.body.id, { copies: ++returnedB.copies }, { useFindAndModify: false });
+        res.status(200).json(null);
+    } catch (err) {
+        console.log("Server fail:", err.message);
+        res.status(500).json({ errMsg: err.message });
+    }
+}
+
+export const top5Books = async (req, res) => {
+    try {
+        const t5B = await Book.find().sort({ borrowed: -1 }).limit(5);
+        res.status(200).json(t5B);
     } catch (err) {
         console.log("Server fail:", err.message);
         res.status(500).json({ errMsg: err.message });

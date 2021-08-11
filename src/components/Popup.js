@@ -37,7 +37,6 @@ const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
                 const res = await axios.post("http://localhost:1000/books/add", { title, img: imgUrl, author, publisher, genres, synopsis: des, copies, borrowed: 0 });
                 addBook(prev => prev.concat(res.data));
                 closePopup(prev => !prev);
-                alert("New book added.");
             } catch (err) {
                 if (err.response.status === 409) {
                     alert(`Add book fail. ${title} already exists in DataBase. Please edit it instead.`);
@@ -53,7 +52,6 @@ const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
                 const res = await axios.patch("http://localhost:1000/books/edit", { id: b2Edit._id, title, img: imgUrl, author, publisher, genres, synopsis: des, copies });
                 editedBook(res.data);
                 closePopup(prev => !prev);
-                alert("Book updated.");
             } catch (err) {
                 if (err.response.status === 400) {
                     alert("Edit fail. Something's wrong and it not the server.");
@@ -138,7 +136,6 @@ const DeleteBook = ({ closePopup, bTitle, bId }) => {
     const handleConfirm = async (id) => {
         try {
             await axios.delete(`http://localhost:1000/books/book/${id}`);
-            alert("Delete Successfully");
             history.push("/");
         } catch (err) {
             if (err.response.status === 404) {
@@ -182,7 +179,6 @@ const NewVisitorForm = ({ closePopup, addVisitor, edit, v2Edit, updVS, i }) => {
                 const res = await axios.post("http://localhost:1000/visitors/add", { name: fname, phone: pNum, borrowRecord: [] });
                 addVisitor(prev => prev.concat(res.data));
                 closePopup(prev => !prev);
-                alert("New visitor added.")
             } catch (err) {
                 if (err.response.status === 409) {
                     alert(`Add visitor fail. ${fname} already exists in DataBase.`);
@@ -197,7 +193,6 @@ const NewVisitorForm = ({ closePopup, addVisitor, edit, v2Edit, updVS, i }) => {
                 const res = await axios.patch("http://localhost:1000/visitors/edit", { id: v2Edit._id, name: fname, phone: pNum });
                 updVS(i, res.data);
                 closePopup(prev => !prev);
-                alert("Update Successfully")
             } catch (err) {
                 if (err.response.status === 400) {
                     alert("Update fail.")
@@ -237,17 +232,17 @@ const NewCardForm = ({ closePopup, addCard }) => {
         axios.get("http://localhost:1000/visitors").then((res) => {
             setAllVisitor(res.data);
         }).catch((err) => {
-            console.log(err);
+            alert(err.message);
         })
         axios.get("http://localhost:1000/books").then((res) => {
             setAllBook(res.data.filter(rd => rd.copies > 0));
         }).catch((err) => {
-            console.log(err);
+            alert(err.message);
         })
     }, [])
 
     const subIdName = (value) => {
-        const id = parseInt(value);
+        const id = value.split(" ")[0];
         const text = value.substr(value.indexOf(" ") + 1);
         return { id, text };
     }
@@ -256,12 +251,15 @@ const NewCardForm = ({ closePopup, addCard }) => {
         e.preventDefault();
         const visitor = subIdName(selectedVisitor);
         const book = subIdName(selectedBook);
-        const res = await axios.post("http://localhost:1000/cards", { visitorId: visitor.id, visitor: visitor.text, bookId: book.id, book: book.text, bDate: formatedToday(), rDate: "" });
-        const res1 = await axios.get(`http://localhost:1000/visitors/${visitor.id}`);
-        await axios.patch(`http://localhost:1000/visitors/${visitor.id}`, { borrowRecord: res1.data.borrowRecord.concat(book.text), borrow: ++res1.data.borrow });
-        const res2 = await axios.get(`http://localhost:1000/books/${book.id}`);
-        await axios.patch(`http://localhost:1000/books/${book.id}`, { copies: --res2.data.copies, borrowed: ++res2.data.borrowed });
-        addCard(prev => prev.concat(res.data));
+        try {
+            await axios.patch("http://localhost:1000/visitors/updBorrow", { id: visitor.id, borrowedBook: book.text });
+            await axios.patch("http://localhost:1000/books/updBorrow", { id: book.id });
+            const res = await axios.post("http://localhost:1000/cards/add", { visitorId: visitor.id, visitor: visitor.text, bookId: book.id, book: book.text, bDate: formatedToday(), rDate: "" });
+            console.log(res.data);
+            addCard(prev => prev.concat(res.data));
+        } catch (err) {
+            alert(err.message);
+        }
         closePopup(prev => !prev)
     }
 
@@ -273,18 +271,18 @@ const NewCardForm = ({ closePopup, addCard }) => {
                 <select onChange={(e) => setSelectedVisitor(e.target.value)}>
                     <option value="">Select</option>
                     {allVisitor.map((a, k) => (
-                        <option value={a.id + " " + a.name} key={k}>{a.name}</option>
+                        <option value={a._id + " " + a.name} key={k}>{a.name}</option>
                     ))}
                 </select>
                 <label htmlFor="">Book:</label>
                 <select onChange={(e) => setSelectedBook(e.target.value)}>
                     <option value="">Select</option>
                     {allBook.map((b, k) => (
-                        <option value={b.id + " " + b.title} key={k}>{b.title}</option>
+                        <option value={b._id + " " + b.title} key={k}>{b.title}</option>
                     ))}
                 </select>
                 <div style={{ display: "flex", justifyContent: "center", marginTop: "20px", gap: "20px" }}>
-                    <button className="btn" style={{ backgroundColor: "lightgrey", color: "black" }} onClick={() => closePopup(prev => !prev)}>Cancel</button>
+                    <button className="btn" type="button" style={{ backgroundColor: "lightgrey", color: "black" }} onClick={() => closePopup(prev => !prev)}>Cancel</button>
                     <button className="btn" type="submit" style={{ backgroundColor: "#52c41a" }}>Save</button>
                 </div>
             </form>

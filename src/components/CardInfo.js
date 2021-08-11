@@ -15,17 +15,20 @@ const CardInfo = ({ card, updCardState, i }) => {
     }, [card.rDate])
 
     const handleClick = async (id) => {
-        const res = await axios.patch(`http://localhost:1000/cards/${id}`, { rDate: formatedToday() });
-        const res1 = await axios.get(`http://localhost:1000/books/${card.bookId}`);
-        await axios.patch(`http://localhost:1000/books/${card.bookId}`, { copies: ++res1.data.copies });
-        updCardState(i, res.data);
-        setBtnReturn(false);
+        try {
+            await axios.patch("http://localhost:1000/books/return", { id: card.bookId });
+            const res = await axios.patch("http://localhost:1000/cards/return", { id: card._id, rDate: formatedToday() });
+            updCardState(i, res.data);
+            setBtnReturn(false);
+        } catch (err) {
+            alert(err.message);
+        }
     }
 
     return (
         <li className="cardInfo">
             <div className="list-info">
-                {card.id}
+                {card._id.substr(-6)}
             </div>
             <div className="list-info">
                 {card.visitor}
@@ -38,7 +41,7 @@ const CardInfo = ({ card, updCardState, i }) => {
             </div>
             <div className={btnReturn ? "list-action" : "list-info"} style={{ border: "0" }}>
                 {btnReturn ? <div>
-                    <div className="icon" onClick={() => handleClick(card.id)}>
+                    <div className="icon" onClick={() => handleClick(card._id)}>
                         <svg xmlns="http://www.w3.org/2000/svg" style={{ width: "25px" }} viewBox="0 0 20 20" fill="currentColor">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z" clipRule="evenodd" />
                         </svg>

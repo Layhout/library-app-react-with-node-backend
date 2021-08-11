@@ -4,7 +4,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
 import bookRoutes from "./routes/bookRoutes.js";
-import visitorRouters from "./routes/visitorRouters.js"
+import visitorRouters from "./routes/visitorRouters.js";
+import cardRouters from "./routes/cardRouters.js";
 
 // create express app
 const app = express();
@@ -25,6 +26,7 @@ app.use(morgan("dev"));
 // routes
 app.use("/books", bookRoutes);
 app.use("/visitors", visitorRouters);
+app.use("/cards", cardRouters);
 
 app.listen(1000, () => {
     console.log("listen on port 1000");

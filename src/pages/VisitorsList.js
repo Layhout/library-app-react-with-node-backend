@@ -10,7 +10,8 @@ const Visitors = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [btnAddVisitor, setBtnAddVisitor] = useState(false);
     const [isError, setIsError] = useState(false);
-    const [errMsg, setErrMsg] = useState("")
+    const [errMsg, setErrMsg] = useState("");
+    const [dataIsHere, setDataIsHere] = useState(false);
 
     const fetchVisitor = async () => {
         try {
@@ -25,6 +26,7 @@ const Visitors = () => {
         fetchVisitor().then((data) => {
             setVisitorState(data);
             setIsLoading(false);
+            setDataIsHere(true);
         }).catch((err) => {
             setIsLoading(false);
             setIsError(true);
@@ -55,7 +57,9 @@ const Visitors = () => {
             <section>
                 <ActionsBar sort={sortVisitor} search={searchVisitor} setBtnAdd={setBtnAddVisitor} sortOp={["ID", "name"]} searchBy="Search by name" btnName="Add new visitor" />
             </section>
-            <section className="list">
+            {isLoading && <h2 style={{ textAlign: "center", marginTop: "30px" }}>Loading...</h2>}
+            {isError && <h2 style={{ textAlign: "center", marginTop: "30px" }}>{errMsg}</h2>}
+            {dataIsHere && <section className="list">
                 <div className="list-header">
                     <h1>ID</h1>
                     <h1>Name</h1>
@@ -63,8 +67,6 @@ const Visitors = () => {
                     <h1>Edit</h1>
                 </div>
                 <div className="list-body">
-                    {isLoading && <h2 style={{ textAlign: "center", marginTop: "30px" }}>Loading...</h2>}
-                    {isError && <h2 style={{ textAlign: "center", marginTop: "30px" }}>{errMsg}</h2>}
                     {
                         <ul>
                             {visitorState.map((vs, k) => (
@@ -73,7 +75,7 @@ const Visitors = () => {
                         </ul>
                     }
                 </div>
-            </section>
+            </section>}
             {btnAddVisitor && <Popup type="newVisitor" closePopup={setBtnAddVisitor} addVisitor={setVisitorState} />}
         </main>
     )
