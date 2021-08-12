@@ -1,4 +1,4 @@
-import "./BookCard.css"
+import "./styles/BookCard.css"
 import Genre from "./Genre"
 
 const BookCard = ({ book }) => {

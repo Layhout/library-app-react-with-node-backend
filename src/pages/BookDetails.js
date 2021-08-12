@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import "./BookDetails.css"
+import "./styles/BookDetails.css"
 import axios from "axios"
 import { useParams } from "react-router-dom"
 import Genre from "../components/Genre"

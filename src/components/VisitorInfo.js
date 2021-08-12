@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Popup from "./Popup"
-import "./VisitorInfo.css"
+import "./styles/VisitorInfo.css"
 
 const VisitorInfo = ({ visitor, updVS, i }) => {
     const [btnEditV, setBtnEditV] = useState(false);

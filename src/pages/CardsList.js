@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ActionsBar from "../components/ActionsBar";
 import axios from "axios";
-import "./CardsList.css";
+import "./styles/CardsList.css";
 import CardInfo from "../components/CardInfo";
 import Popup from "../components/Popup";
 

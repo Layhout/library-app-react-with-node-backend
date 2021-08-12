@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import ActionsBar from "../components/ActionsBar"
 import Popup from "../components/Popup"
 import VisitorInfo from "../components/VisitorInfo"
-import "./VisitorsList.css"
+import "./styles/VisitorsList.css"
 
 const Visitors = () => {
     const [visitorState, setVisitorState] = useState([]);

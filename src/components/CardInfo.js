@@ -1,4 +1,4 @@
-import "./CardInfo.css";
+import "./styles/CardInfo.css";
 import formatedToday from "./formatedToday";
 import axios from "axios";
 import { useEffect, useState } from "react";

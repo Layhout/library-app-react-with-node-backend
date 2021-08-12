@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "./TopBooks.css";
+import "./styles/TopBooks.css";
 
 const TopBooks = () => {
     const [firstBook, setFirstBook] = useState({});

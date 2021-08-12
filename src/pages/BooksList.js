@@ -1,5 +1,5 @@
 import BookCard from "../components/BookCard"
-import "./BooksList.css"
+import "./styles/BooksList.css"
 import Masonry from "react-masonry-css"
 import Popup from "../components/Popup"
 import { useState, useEffect } from "react"

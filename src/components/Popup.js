@@ -1,4 +1,4 @@
-import "./Popup.css"
+import "./styles/Popup.css"
 import { useEffect, useRef, useState } from "react";
 import Genre from "./Genre";
 import Backdrop from "./Backdrop";

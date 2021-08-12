@@ -1,4 +1,4 @@
-import "./ActionsBar.css"
+import "./styles/ActionsBar.css"
 
 const ActionsBar = ({ sort, search, setBtnAdd, sortOp, btnName, searchBy }) => {
     return (
