@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Genre from "./Genre";
 import Backdrop from "./Backdrop";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import formatedToday from "./formatedToday";
 
 const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
@@ -130,8 +130,9 @@ const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
     )
 }
 
-const DeleteBook = ({ closePopup, bTitle, bId }) => {
+const DeleteBook = ({ closePopup, bTitle }) => {
     const history = useHistory();
+    const { id } = useParams();
 
     const handleConfirm = async (id) => {
         try {
@@ -153,7 +154,7 @@ const DeleteBook = ({ closePopup, bTitle, bId }) => {
             <h1 style={{ textAlign: "center", marginBottom: "40px" }}>Do you really want to delete <span style={{ textTransform: "capitalize" }}>{bTitle}</span> from DataBase?</h1>
             <div className="delete-actions">
                 <button className="btn" style={{ backgroundColor: "lightgrey", color: "black" }} onClick={() => closePopup(prev => !prev)}>cancel</button>
-                <button className="btn" style={{ backgroundColor: "#E53935" }} onClick={() => handleConfirm(bId)}>confirm</button>
+                <button className="btn" style={{ backgroundColor: "#E53935" }} onClick={() => handleConfirm(id)}>confirm</button>
             </div>
         </section>
     )
@@ -290,12 +291,12 @@ const NewCardForm = ({ closePopup, addCard }) => {
     )
 }
 
-const SwitchPopup = ({ type, closePopup, addBook, bTitle, bId, b2Edit, editedBook, addVisitor, v2Edit, updVS, addCard, i }) => {
+const SwitchPopup = ({ type, closePopup, addBook, bTitle, b2Edit, editedBook, addVisitor, v2Edit, updVS, addCard, i }) => {
     switch (type) {
         case "newBook":
             return <NewBookForm closePopup={closePopup} addBook={addBook} />
         case "deleteBook":
-            return <DeleteBook closePopup={closePopup} bTitle={bTitle} bId={bId} />
+            return <DeleteBook closePopup={closePopup} bTitle={bTitle} />
         case "editBook":
             return <NewBookForm closePopup={closePopup} edit={true} b2Edit={b2Edit} editedBook={editedBook} />
         case "newVisitor":
@@ -311,12 +312,12 @@ const SwitchPopup = ({ type, closePopup, addBook, bTitle, bId, b2Edit, editedBoo
     }
 }
 
-const Popup = ({ type, closePopup, addBook, bTitle, bId, b2Edit, editedBook, addVisitor, v2Edit, updVS, addCard, i }) => {
+const Popup = ({ type, closePopup, addBook, bTitle, b2Edit, editedBook, addVisitor, v2Edit, updVS, addCard, i }) => {
     return (
         <div>
             <Backdrop closePopup={closePopup} />
             <div className={`popup ${type === "deleteBook" ? "delete-book" : ""}`}>
-                <SwitchPopup type={type} closePopup={closePopup} addBook={addBook} bTitle={bTitle} bId={bId} b2Edit={b2Edit} editedBook={editedBook} addVisitor={addVisitor} v2Edit={v2Edit} updVS={updVS} addCard={addCard} i={i} />
+                <SwitchPopup type={type} closePopup={closePopup} addBook={addBook} bTitle={bTitle} b2Edit={b2Edit} editedBook={editedBook} addVisitor={addVisitor} v2Edit={v2Edit} updVS={updVS} addCard={addCard} i={i} />
             </div>
         </div>
     )
