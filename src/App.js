@@ -6,6 +6,9 @@ import CardsList from './pages/CardsList';
 import Statistics from './pages/Statistics';
 import BookDetails from './pages/BookDetails';
 import Footer from "./components/Footer";
+import BookContextProvider from "./contexts/BookContext";
+import VisitorContextProvider from "./contexts/VisitorContext";
+import CardContextProvider from "./contexts/CardContext";
 
 function App() {
   return (
@@ -14,19 +17,27 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path="/">
-            <BooksList />
+            <BookContextProvider>
+              <BooksList />
+            </BookContextProvider>
           </Route>
           <Route path="/visitors">
-            <VisitorsList />
+            <VisitorContextProvider>
+              <VisitorsList />
+            </VisitorContextProvider>
           </Route>
           <Route path="/cards">
-            <CardsList />
+            <CardContextProvider>
+              <CardsList />
+            </CardContextProvider>
           </Route>
           <Route path="/statistics">
             <Statistics />
           </Route>
           <Route path="/books/:id">
-            <BookDetails />
+            <BookContextProvider>
+              <BookDetails />
+            </BookContextProvider>
           </Route>
         </Switch>
       </BrowserRouter>

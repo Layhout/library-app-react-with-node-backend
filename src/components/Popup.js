@@ -1,12 +1,15 @@
 import "./styles/Popup.css"
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Genre from "./Genre";
 import Backdrop from "./Backdrop";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import formatedToday from "./formatedToday";
+import { BookContext } from "../contexts/BookContext";
+import { VisitorContext } from "../contexts/VisitorContext";
+import { CardContext } from "../contexts/CardContext";
 
-const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
+const NewBookForm = ({ closePopup, edit, b2Edit, editedBook }) => {
     const [imgUrl, setImgUrl] = useState("https://st3.depositphotos.com/23594922/31822/v/600/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg");
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
@@ -15,7 +18,8 @@ const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
     const [copies, setCopies] = useState("");
     const inputRef = useRef();
     const [genres, setGenres] = useState([]);
-    const [popupTitle, setPopupTitle] = useState("Adding a new book")
+    const [popupTitle, setPopupTitle] = useState("Adding a new book");
+    const { bookDispatch } = useContext(BookContext);
 
     useEffect(() => {
         if (edit) {
@@ -35,7 +39,7 @@ const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
         if (!edit) {
             try {
                 const res = await axios.post("http://localhost:1000/books/add", { title, img: imgUrl, author, publisher, genres, synopsis: des, copies, borrowed: 0 });
-                addBook(prev => prev.concat(res.data));
+                bookDispatch({ type: "ADD_BOOK", data: res.data })
                 closePopup(prev => !prev);
             } catch (err) {
                 if (err.response.status === 409) {
@@ -51,13 +55,14 @@ const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
             try {
                 const res = await axios.patch("http://localhost:1000/books/edit", { id: b2Edit._id, title, img: imgUrl, author, publisher, genres, synopsis: des, copies });
                 editedBook(res.data);
+                bookDispatch({ type: "UPDATE_ONE_BOOK", data: res.data });
                 closePopup(prev => !prev);
             } catch (err) {
                 if (err.response.status === 400) {
                     alert("Edit fail. Something's wrong and it not the server.");
                     closePopup(prev => !prev);
                 } else {
-                    alert("Server failure " + err.message);
+                    alert(err.message);
                     closePopup(prev => !prev);
                 }
             }
@@ -130,8 +135,9 @@ const NewBookForm = ({ closePopup, addBook, edit, b2Edit, editedBook }) => {
     )
 }
 
-const DeleteBook = ({ closePopup, bTitle, bId }) => {
+const DeleteBook = ({ closePopup, bTitle }) => {
     const history = useHistory();
+    const { id } = useParams();
 
     const handleConfirm = async (id) => {
         try {
@@ -153,16 +159,17 @@ const DeleteBook = ({ closePopup, bTitle, bId }) => {
             <h1 style={{ textAlign: "center", marginBottom: "40px" }}>Do you really want to delete <span style={{ textTransform: "capitalize" }}>{bTitle}</span> from DataBase?</h1>
             <div className="delete-actions">
                 <button className="btn" style={{ backgroundColor: "lightgrey", color: "black" }} onClick={() => closePopup(prev => !prev)}>cancel</button>
-                <button className="btn" style={{ backgroundColor: "#E53935" }} onClick={() => handleConfirm(bId)}>confirm</button>
+                <button className="btn" style={{ backgroundColor: "#E53935" }} onClick={() => handleConfirm(id)}>confirm</button>
             </div>
         </section>
     )
 }
 
-const NewVisitorForm = ({ closePopup, addVisitor, edit, v2Edit, updVS, i }) => {
+const NewVisitorForm = ({ closePopup, edit, v2Edit }) => {
     const [fname, setFname] = useState("");
     const [pNum, setPNum] = useState("");
-    const [popupTitle, setPopupTitle] = useState("Add a New Visitor")
+    const [popupTitle, setPopupTitle] = useState("Add a New Visitor");
+    const { visitorDispatch } = useContext(VisitorContext);
 
     useEffect(() => {
         if (edit) {
@@ -177,7 +184,7 @@ const NewVisitorForm = ({ closePopup, addVisitor, edit, v2Edit, updVS, i }) => {
         if (!edit) {
             try {
                 const res = await axios.post("http://localhost:1000/visitors/add", { name: fname, phone: pNum, borrowRecord: [] });
-                addVisitor(prev => prev.concat(res.data));
+                visitorDispatch({ type: "ADD_VISITOR", data: res.data });
                 closePopup(prev => !prev);
             } catch (err) {
                 if (err.response.status === 409) {
@@ -191,14 +198,14 @@ const NewVisitorForm = ({ closePopup, addVisitor, edit, v2Edit, updVS, i }) => {
         } else {
             try {
                 const res = await axios.patch("http://localhost:1000/visitors/edit", { id: v2Edit._id, name: fname, phone: pNum });
-                updVS(i, res.data);
+                visitorDispatch({ type: "UPDATE_ONE_VISITOR", data: res.data });
                 closePopup(prev => !prev);
             } catch (err) {
                 if (err.response.status === 400) {
                     alert("Update fail.")
                     closePopup(prev => !prev);
                 } else {
-                    alert("Server failure " + err.message);
+                    alert(err.message);
                     closePopup(prev => !prev);
                 }
             }
@@ -222,11 +229,12 @@ const NewVisitorForm = ({ closePopup, addVisitor, edit, v2Edit, updVS, i }) => {
     )
 }
 
-const NewCardForm = ({ closePopup, addCard }) => {
+const NewCardForm = ({ closePopup }) => {
     const [allVisitor, setAllVisitor] = useState([])
     const [allBook, setAllBook] = useState([]);
     const [selectedVisitor, setSelectedVisitor] = useState("");
     const [selectedBook, setSelectedBook] = useState("");
+    const { cardDispatch } = useContext(CardContext);
 
     useEffect(() => {
         axios.get("http://localhost:1000/visitors").then((res) => {
@@ -256,7 +264,7 @@ const NewCardForm = ({ closePopup, addCard }) => {
             await axios.patch("http://localhost:1000/books/updBorrow", { id: book.id });
             const res = await axios.post("http://localhost:1000/cards/add", { visitorId: visitor.id, visitor: visitor.text, bookId: book.id, book: book.text, bDate: formatedToday(), rDate: "" });
             console.log(res.data);
-            addCard(prev => prev.concat(res.data));
+            cardDispatch({ type: "ADD_CARD", data: res.data });
         } catch (err) {
             alert(err.message);
         }
@@ -290,20 +298,20 @@ const NewCardForm = ({ closePopup, addCard }) => {
     )
 }
 
-const SwitchPopup = ({ type, closePopup, addBook, bTitle, bId, b2Edit, editedBook, addVisitor, v2Edit, updVS, addCard, i }) => {
+const SwitchPopup = ({ type, closePopup, bTitle, b2Edit, editedBook, v2Edit }) => {
     switch (type) {
         case "newBook":
-            return <NewBookForm closePopup={closePopup} addBook={addBook} />
+            return <NewBookForm closePopup={closePopup} />
         case "deleteBook":
-            return <DeleteBook closePopup={closePopup} bTitle={bTitle} bId={bId} />
+            return <DeleteBook closePopup={closePopup} bTitle={bTitle} />
         case "editBook":
             return <NewBookForm closePopup={closePopup} edit={true} b2Edit={b2Edit} editedBook={editedBook} />
         case "newVisitor":
-            return <NewVisitorForm closePopup={closePopup} addVisitor={addVisitor} />
+            return <NewVisitorForm closePopup={closePopup} />
         case "editVisitor":
-            return <NewVisitorForm closePopup={closePopup} edit={true} v2Edit={v2Edit} updVS={updVS} i={i} />
+            return <NewVisitorForm closePopup={closePopup} edit={true} v2Edit={v2Edit} />
         case "newCard":
-            return <NewCardForm closePopup={closePopup} addCard={addCard} />
+            return <NewCardForm closePopup={closePopup} />
         default:
             return <div style={{ textAlign: "center" }}>
                 You didn't specify the correct kind of Popup.
@@ -311,12 +319,12 @@ const SwitchPopup = ({ type, closePopup, addBook, bTitle, bId, b2Edit, editedBoo
     }
 }
 
-const Popup = ({ type, closePopup, addBook, bTitle, bId, b2Edit, editedBook, addVisitor, v2Edit, updVS, addCard, i }) => {
+const Popup = ({ type, closePopup, bTitle, b2Edit, editedBook, v2Edit }) => {
     return (
         <div>
             <Backdrop closePopup={closePopup} />
             <div className={`popup ${type === "deleteBook" ? "delete-book" : ""}`}>
-                <SwitchPopup type={type} closePopup={closePopup} addBook={addBook} bTitle={bTitle} bId={bId} b2Edit={b2Edit} editedBook={editedBook} addVisitor={addVisitor} v2Edit={v2Edit} updVS={updVS} addCard={addCard} i={i} />
+                <SwitchPopup type={type} closePopup={closePopup} bTitle={bTitle} b2Edit={b2Edit} editedBook={editedBook} v2Edit={v2Edit} />
             </div>
         </div>
     )

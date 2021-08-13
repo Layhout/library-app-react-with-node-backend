@@ -2,7 +2,7 @@ import { useState } from "react"
 import Popup from "./Popup"
 import "./styles/VisitorInfo.css"
 
-const VisitorInfo = ({ visitor, updVS, i }) => {
+const VisitorInfo = ({ visitor }) => {
     const [btnEditV, setBtnEditV] = useState(false);
 
     return (
@@ -23,7 +23,7 @@ const VisitorInfo = ({ visitor, updVS, i }) => {
                     </svg>
                 </span>
             </div>
-            {btnEditV && <Popup type="editVisitor" closePopup={setBtnEditV} v2Edit={visitor} updVS={updVS} i={i} />}
+            {btnEditV && <Popup type="editVisitor" closePopup={setBtnEditV} v2Edit={visitor} />}
         </li>
     )
 }

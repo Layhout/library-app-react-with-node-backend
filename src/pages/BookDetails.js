@@ -30,7 +30,7 @@ const BookDetails = () => {
             } else {
                 setIsError(true);
                 setIsLoading(false);
-                setErrMsg("Server failure: " + err.messgae);
+                setErrMsg(err.message);
             }
         });
     }, [id])
@@ -81,7 +81,7 @@ const BookDetails = () => {
                         </button>
                     </div>
                 </div>
-                {btnDelete && <Popup type="deleteBook" closePopup={setBtnDelete} bTitle={book.title} bId={book._id} />}
+                {btnDelete && <Popup type="deleteBook" closePopup={setBtnDelete} bTitle={book.title} />}
                 {btnEdit && <Popup type="editBook" closePopup={setBtnEdit} b2Edit={book} editedBook={setBook} />}
             </div>}
         </main>
