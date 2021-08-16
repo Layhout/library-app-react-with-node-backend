@@ -1,7 +1,7 @@
 export const visitorReducer = (state, action) => {
     switch (action.type) {
         case "ADD_VISITOR":
-            return [...state, action.data];
+            return state.concat(action.data);
         case "UPDATE_ONE_VISITOR":
             const newVisitorState = [...state];
             const i = newVisitorState.findIndex(nvs => nvs._id === action.data._id);

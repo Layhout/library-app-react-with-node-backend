@@ -7,7 +7,7 @@ router.get("/", allBooks);
 router.get("/book/:id", getOneBook);
 router.delete("/book/:id", deleteOneBook);
 router.post("/add", addBook);
-router.patch("/edit", editBook);
+router.patch("/edit/:id", editBook);
 router.patch("/updBorrow", updBorrow);
 router.patch("/return", returnBook);
 router.get("/top5", top5Books);

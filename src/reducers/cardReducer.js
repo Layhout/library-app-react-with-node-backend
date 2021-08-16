@@ -1,7 +1,7 @@
 export const cardReducer = (state, action) => {
     switch (action.type) {
         case "ADD_CARD":
-            return [...state, action.data];
+            return state.concat(action.data);
         case "LOAD_CARD":
             return action.data;
         case "UPDATE_ONE_CARD":

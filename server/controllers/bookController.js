@@ -45,12 +45,13 @@ export const deleteOneBook = async (req, res) => {
 
 export const addBook = async (req, res) => {
     try {
-        const foundBook = await Book.findOne({ title: req.body.title.trim().toLowerCase() })
+        const allBook = await Book.find();
+        const foundBook = allBook.find(book => book.title.toLowerCase() === req.body.title.trim().toLowerCase());
         if (foundBook) {
             res.status(409).json({ msg: "Book already exists" });
             return;
         }
-        const newBook = new Book({ ...req.body, title: req.body.title.trim().toLowerCase(), img: req.body.img.trim(), author: req.body.author.trim().toLowerCase(), publisher: req.body.publisher.trim().toLowerCase() });
+        const newBook = new Book({ ...req.body, title: req.body.title.trim(), img: req.body.img.trim(), author: req.body.author.trim(), publisher: req.body.publisher.trim() });
         const addedBook = await newBook.save();
         res.status(201).json(addedBook);
     } catch (err) {
@@ -60,8 +61,9 @@ export const addBook = async (req, res) => {
 }
 
 export const editBook = async (req, res) => {
+    const id = req.params.id
     try {
-        const editedBook = await Book.findByIdAndUpdate(req.body.id, req.body, { useFindAndModify: false, new: true });
+        const editedBook = await Book.findByIdAndUpdate(id, { ...req.body, title: req.body.title.trim(), img: req.body.img.trim(), author: req.body.author.trim(), publisher: req.body.publisher.trim() }, { useFindAndModify: false, new: true });
         if (editedBook) {
             res.status(200).json(editedBook);
             return;

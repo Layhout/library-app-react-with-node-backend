@@ -12,12 +12,13 @@ export const allVisitors = async (req, res) => {
 
 export const addVisitor = async (req, res) => {
     try {
-        const foundV = await Visitor.findOne({ name: req.body.name });
+        const allV = await Visitor.find();
+        const foundV = allV.find(v => v.name.toLowerCase() === req.body.name.trim().toLowerCase())
         if (foundV) {
             res.status(409).json({ msg: "visitor already exists" });
             return;
         }
-        const newVisitor = new Visitor({ ...req.body, name: req.body.name.trim().toLowerCase(), borrow: 0 });
+        const newVisitor = new Visitor({ ...req.body, name: req.body.name.trim(), borrow: 0 });
         const addedVisitor = await newVisitor.save();
         res.status(201).json(addedVisitor);
     } catch (err) {

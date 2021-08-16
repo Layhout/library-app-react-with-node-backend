@@ -20,7 +20,7 @@ const BookList = () => {
         if (by === "copies") {
             setBookState(books.slice().sort((a, b) => b[by] - a[by]));
         } else {
-            setBookState(books.slice().sort((a, b) => (a[by] < b[by]) ? -1 : 1));
+            setBookState(books.slice().sort((a, b) => (a[by].toLowerCase() < b[by].toLowerCase()) ? -1 : 1));
         }
     }
 

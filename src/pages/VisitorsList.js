@@ -15,7 +15,7 @@ const Visitors = () => {
     }, [visitors]);
 
     const sortVisitor = (by) => {
-        setVisitorState(visitors.slice().sort((a, b) => (a[by] < b[by]) ? -1 : 1));
+        setVisitorState(visitors.slice().sort((a, b) => (a[by].toLowerCase() < b[by].toLowerCase()) ? -1 : 1));
     }
 
     const searchVisitor = (term) => {

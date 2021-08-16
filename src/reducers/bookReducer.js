@@ -1,9 +1,9 @@
 export const bookReducer = (state, action) => {
     switch (action.type) {
         case "ADD_BOOK":
-            return [...state, action.data];
+            return state.concat(action.data);
         case "REMOVE_BOOK":
-            return state.filter(s => s.id !== action.data);
+            return state.filter(s => s._id !== action.data);
         case "LOAD_BOOK":
             return action.data;
         case "UPDATE_ONE_BOOK":

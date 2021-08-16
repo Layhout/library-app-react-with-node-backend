@@ -11,7 +11,7 @@ const BookContextProvider = ({ children }) => {
         axios.get("http://localhost:1000/books").then(res => {
             bookDispatch({ type: "LOAD_BOOK", data: res.data });
         }).catch(err => bookDispatch({ type: "LOAD_BOOK", data: { error: err.message } }));
-    }, [])
+    }, []);
 
     return (
         <BookContext.Provider value={{ books, bookDispatch }}>

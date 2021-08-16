@@ -70,6 +70,8 @@
 }
 
 .delete-book .delete-actions{
+  width: 50%;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }

@@ -9,41 +9,53 @@ import { BookContext } from "../contexts/BookContext";
 import { VisitorContext } from "../contexts/VisitorContext";
 import { CardContext } from "../contexts/CardContext";
 
-const NewBookForm = ({ closePopup, edit, b2Edit, editedBook }) => {
+const NewBookForm = ({ closePopup, edit }) => {
     const [imgUrl, setImgUrl] = useState("https://st3.depositphotos.com/23594922/31822/v/600/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg");
-    const [title, setTitle] = useState("");
-    const [author, setAuthor] = useState("");
-    const [publisher, setPublisher] = useState("");
-    const [des, setDes] = useState("");
-    const [copies, setCopies] = useState("");
-    const inputRef = useRef();
+    const genresRef = useRef();
     const [genres, setGenres] = useState([]);
     const [popupTitle, setPopupTitle] = useState("Adding a new book");
+    const titleRef = useRef();
+    const authorRef = useRef();
+    const publisherRef = useRef();
+    const desRef = useRef();
+    const copiesRef = useRef();
     const { bookDispatch } = useContext(BookContext);
+    const { id } = useParams();
+    const { books } = useContext(BookContext);
 
     useEffect(() => {
         if (edit) {
+            const b2Edit = books.find(b => b._id === id);
             setImgUrl(b2Edit.img);
-            setTitle(b2Edit.title);
-            setAuthor(b2Edit.author);
-            setPublisher(b2Edit.publisher);
-            setDes(b2Edit.synopsis);
-            setCopies(b2Edit.copies);
+            titleRef.current.value = b2Edit.title;
+            authorRef.current.value = b2Edit.author;
+            publisherRef.current.value = b2Edit.publisher;
+            desRef.current.value = b2Edit.synopsis;
+            copiesRef.current.value = b2Edit.copies;
             setGenres(b2Edit.genres);
             setPopupTitle("Editing a Book Info")
         }
-    }, [b2Edit, edit])
+    }, [books, edit, id])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!edit) {
             try {
-                const res = await axios.post("http://localhost:1000/books/add", { title, img: imgUrl, author, publisher, genres, synopsis: des, copies, borrowed: 0 });
+                const res = await axios.post("http://localhost:1000/books/add", {
+                    title: titleRef.current.value,
+                    img: imgUrl,
+                    author: authorRef.current.value,
+                    publisher: publisherRef.current.value,
+                    genres,
+                    synopsis: desRef.current.value,
+                    copies: copiesRef.current.value,
+                    borrowed: 0
+                });
                 bookDispatch({ type: "ADD_BOOK", data: res.data })
                 closePopup(prev => !prev);
             } catch (err) {
                 if (err.response.status === 409) {
-                    alert(`Add book fail. ${title} already exists in DataBase. Please edit it instead.`);
+                    alert(`Add book fail. ${titleRef.current.value} already exists in DataBase. Please edit it instead.`);
                     closePopup(prev => !prev);
                 } else {
                     alert("Server failure " + err.message);
@@ -53,8 +65,15 @@ const NewBookForm = ({ closePopup, edit, b2Edit, editedBook }) => {
 
         } else {
             try {
-                const res = await axios.patch("http://localhost:1000/books/edit", { id: b2Edit._id, title, img: imgUrl, author, publisher, genres, synopsis: des, copies });
-                editedBook(res.data);
+                const res = await axios.patch(`http://localhost:1000/books/edit/${id}`, {
+                    title: titleRef.current.value,
+                    img: imgUrl,
+                    author: authorRef.current.value,
+                    publisher: publisherRef.current.value,
+                    genres,
+                    synopsis: desRef.current.value,
+                    copies: copiesRef.current.value,
+                });
                 bookDispatch({ type: "UPDATE_ONE_BOOK", data: res.data });
                 closePopup(prev => !prev);
             } catch (err) {
@@ -71,12 +90,12 @@ const NewBookForm = ({ closePopup, edit, b2Edit, editedBook }) => {
 
     const addGenre = (item) => {
         if (item.startsWith(" ")) {
-            inputRef.current.value = "";
+            genresRef.current.value = "";
         } else if (item.startsWith(",")) {
-            inputRef.current.value = "";
+            genresRef.current.value = "";
         } else if (item.endsWith(",")) {
             setGenres(prev => prev.concat(item.replace(",", "")));
-            inputRef.current.value = "";
+            genresRef.current.value = "";
         }
     }
 
@@ -93,23 +112,23 @@ const NewBookForm = ({ closePopup, edit, b2Edit, editedBook }) => {
                 <h1>{popupTitle}</h1>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="title">Title: </label>
-                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title of the book" required />
+                    <input type="text" ref={titleRef} placeholder="Title of the book" required />
                     <div style={{ display: "flex", gap: "20px" }}>
                         <div>
                             <label htmlFor="title">Author: </label>
-                            <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Who wrote the book?" required />
+                            <input type="text" ref={authorRef} placeholder="Who wrote the book?" required />
                         </div>
                         <div>
                             <label htmlFor="title">Publisher: </label>
-                            <input type="text" value={publisher} onChange={(e) => setPublisher(e.target.value)} placeholder="Who publishered the book?" required />
+                            <input type="text" ref={publisherRef} placeholder="Who publishered the book?" required />
                         </div>
                     </div>
                     <label htmlFor="title">Description: </label>
-                    <textarea name="" id="description" rows="5" style={{ marginBottom: "5px" }} value={des} onChange={(e) => setDes(e.target.value)} placeholder="What's the book about?" required></textarea>
+                    <textarea name="" id="description" rows="5" style={{ marginBottom: "5px" }} ref={desRef} placeholder="What's the book about?" required></textarea>
                     <div style={{ display: "flex", gap: "20px" }}>
                         <div>
                             <label htmlFor="title">Genre: </label>
-                            <input type="text" onChange={(e) => addGenre(e.target.value, e)} ref={inputRef} style={{ margin: "0" }} placeholder="press (,) to add a genre..." />
+                            <input type="text" onChange={(e) => addGenre(e.target.value)} ref={genresRef} style={{ margin: "0" }} placeholder="press (,) to add a genre..." />
                             <div style={{ display: "flex", flexWrap: "wrap", marginTop: "5px", marginBottom: "10px" }}>
                                 {genres.map((genre, k) => (
                                     <div key={k} onClick={(e) => deleteGenre(e.target.innerHTML)}>
@@ -120,7 +139,7 @@ const NewBookForm = ({ closePopup, edit, b2Edit, editedBook }) => {
                         </div>
                         <div>
                             <label htmlFor="title">copies: </label>
-                            <input type="number" min={0} value={copies} onChange={(e) => setCopies(e.target.value)} placeholder="Number of books..." required />
+                            <input type="number" min={0} ref={copiesRef} placeholder="Number of books..." required />
                         </div>
                     </div>
                     <label htmlFor="title" >Image Url: </label>
@@ -135,13 +154,21 @@ const NewBookForm = ({ closePopup, edit, b2Edit, editedBook }) => {
     )
 }
 
-const DeleteBook = ({ closePopup, bTitle }) => {
+const DeleteBook = ({ closePopup }) => {
     const history = useHistory();
     const { id } = useParams();
+    const { books, bookDispatch } = useContext(BookContext);
+    const [bTitle, setBTitle] = useState("")
 
-    const handleConfirm = async (id) => {
+    useEffect(() => {
+        const { title } = books.find(b => b._id === id);
+        setBTitle(title);
+    }, [id, books])
+
+    const handleConfirm = async () => {
         try {
             await axios.delete(`http://localhost:1000/books/book/${id}`);
+            bookDispatch({ type: "REMOVE_BOOK", data: id });
             history.push("/");
         } catch (err) {
             if (err.response.status === 404) {
@@ -159,22 +186,22 @@ const DeleteBook = ({ closePopup, bTitle }) => {
             <h1 style={{ textAlign: "center", marginBottom: "40px" }}>Do you really want to delete <span style={{ textTransform: "capitalize" }}>{bTitle}</span> from DataBase?</h1>
             <div className="delete-actions">
                 <button className="btn" style={{ backgroundColor: "lightgrey", color: "black" }} onClick={() => closePopup(prev => !prev)}>cancel</button>
-                <button className="btn" style={{ backgroundColor: "#E53935" }} onClick={() => handleConfirm(id)}>confirm</button>
+                <button className="btn" style={{ backgroundColor: "#E53935" }} onClick={handleConfirm}>confirm</button>
             </div>
         </section>
     )
 }
 
 const NewVisitorForm = ({ closePopup, edit, v2Edit }) => {
-    const [fname, setFname] = useState("");
-    const [pNum, setPNum] = useState("");
+    const fname = useRef("");
+    const pNum = useRef("");
     const [popupTitle, setPopupTitle] = useState("Add a New Visitor");
     const { visitorDispatch } = useContext(VisitorContext);
 
     useEffect(() => {
         if (edit) {
-            setFname(v2Edit.name);
-            setPNum(v2Edit.phone);
+            fname.current.value = v2Edit.name;
+            pNum.current.value = v2Edit.phone;
             setPopupTitle("Editing a Visitor Info");
         }
     }, [edit, v2Edit]);
@@ -183,13 +210,13 @@ const NewVisitorForm = ({ closePopup, edit, v2Edit }) => {
         e.preventDefault();
         if (!edit) {
             try {
-                const res = await axios.post("http://localhost:1000/visitors/add", { name: fname, phone: pNum, borrowRecord: [] });
+                const res = await axios.post("http://localhost:1000/visitors/add", { name: fname.current.value, phone: pNum.current.value, borrowRecord: [] });
                 visitorDispatch({ type: "ADD_VISITOR", data: res.data });
                 closePopup(prev => !prev);
             } catch (err) {
                 if (err.response.status === 409) {
-                    alert(`Add visitor fail. ${fname} already exists in DataBase.`);
-                    return;
+                    alert(`Add visitor fail. ${fname.current.value} already exists in DataBase.`);
+                    closePopup(prev => !prev);
                 } else {
                     alert("Server failure " + err.message);
                     closePopup(prev => !prev);
@@ -197,7 +224,7 @@ const NewVisitorForm = ({ closePopup, edit, v2Edit }) => {
             }
         } else {
             try {
-                const res = await axios.patch("http://localhost:1000/visitors/edit", { id: v2Edit._id, name: fname, phone: pNum });
+                const res = await axios.patch("http://localhost:1000/visitors/edit", { id: v2Edit._id, name: fname.current.value, phone: pNum.current.value });
                 visitorDispatch({ type: "UPDATE_ONE_VISITOR", data: res.data });
                 closePopup(prev => !prev);
             } catch (err) {
@@ -217,9 +244,9 @@ const NewVisitorForm = ({ closePopup, edit, v2Edit }) => {
             <h1 style={{ textAlign: "center", marginBottom: "20px" }}>{popupTitle}</h1>
             <form className="input-form" onSubmit={handleSubmit}>
                 <label htmlFor="">Full Name:</label>
-                <input type="text" value={fname} onChange={(e) => setFname(e.target.value.toLowerCase())} placeholder="First name and last name" required />
+                <input type="text" ref={fname} placeholder="First name and last name" required />
                 <label htmlFor="">Phone:</label>
-                <input type="text" value={pNum} onChange={(e) => setPNum(e.target.value)} placeholder="Phone number" required />
+                <input type="text" ref={pNum} placeholder="Phone number" required />
                 <div style={{ display: "flex", justifyContent: "center", marginTop: "20px", gap: "20px" }}>
                     <button className="btn" type="button" style={{ backgroundColor: "lightgrey", color: "black" }} onClick={() => closePopup(prev => !prev)}>Cancel</button>
                     <button className="btn" type="submit" style={{ backgroundColor: "#52c41a" }}>Save</button>
@@ -298,14 +325,14 @@ const NewCardForm = ({ closePopup }) => {
     )
 }
 
-const SwitchPopup = ({ type, closePopup, bTitle, b2Edit, editedBook, v2Edit }) => {
+const SwitchPopup = ({ type, closePopup, v2Edit }) => {
     switch (type) {
         case "newBook":
             return <NewBookForm closePopup={closePopup} />
         case "deleteBook":
-            return <DeleteBook closePopup={closePopup} bTitle={bTitle} />
+            return <DeleteBook closePopup={closePopup} />
         case "editBook":
-            return <NewBookForm closePopup={closePopup} edit={true} b2Edit={b2Edit} editedBook={editedBook} />
+            return <NewBookForm closePopup={closePopup} edit={true} />
         case "newVisitor":
             return <NewVisitorForm closePopup={closePopup} />
         case "editVisitor":
@@ -319,12 +346,12 @@ const SwitchPopup = ({ type, closePopup, bTitle, b2Edit, editedBook, v2Edit }) =
     }
 }
 
-const Popup = ({ type, closePopup, bTitle, b2Edit, editedBook, v2Edit }) => {
+const Popup = ({ type, closePopup, v2Edit }) => {
     return (
         <div>
             <Backdrop closePopup={closePopup} />
             <div className={`popup ${type === "deleteBook" ? "delete-book" : ""}`}>
-                <SwitchPopup type={type} closePopup={closePopup} bTitle={bTitle} b2Edit={b2Edit} editedBook={editedBook} v2Edit={v2Edit} />
+                <SwitchPopup type={type} closePopup={closePopup} v2Edit={v2Edit} />
             </div>
         </div>
     )
