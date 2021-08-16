@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useReducer } from "react"
-import { visitorReducer } from "../reducers/visitorReducer";
+import { visitorReducer } from "../redux/reducers/visitorReducer";
 
 export const VisitorContext = createContext();
 

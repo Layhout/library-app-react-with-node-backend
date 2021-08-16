@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useReducer } from "react"
-import { cardReducer } from "../reducers/cardReducer";
+import { cardReducer } from "../redux/reducers/cardReducer";
 
 export const CardContext = createContext();
 

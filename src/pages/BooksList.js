@@ -2,19 +2,20 @@ import BookCard from "../components/BookCard"
 import "./styles/BooksList.css"
 import Masonry from "react-masonry-css"
 import Popup from "../components/Popup"
-import { useState, useContext, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import ActionsBar from "../components/ActionsBar"
-import { BookContext } from "../contexts/BookContext"
+import { useSelector, useDispatch } from "react-redux"
 
 const BookList = () => {
-    const { books } = useContext(BookContext);
+    const books = useSelector(state => state.books);
+    const dispatch = useDispatch();
     const [bookState, setBookState] = useState([]);
     const [btnAddBook, setBtnAddBook] = useState(false);
 
     useEffect(() => {
-        setBookState(books)
-    }, [books])
+        setBookState(books);
+    }, [])
 
     const sortBook = (by) => {
         if (by === "copies") {

@@ -1,4 +1,4 @@
-export const cardReducer = (state, action) => {
+export const cardReducer = (state = [], action) => {
     switch (action.type) {
         case "ADD_CARD":
             return state.concat(action.data);

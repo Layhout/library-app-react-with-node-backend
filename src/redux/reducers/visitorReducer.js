@@ -1,4 +1,4 @@
-export const visitorReducer = (state, action) => {
+export const visitorReducer = (state = [], action) => {
     switch (action.type) {
         case "ADD_VISITOR":
             return state.concat(action.data);

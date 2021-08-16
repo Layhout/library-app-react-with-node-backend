@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useReducer } from "react"
-import { bookReducer } from "../reducers/bookReducer";
+import { bookReducer } from "../redux/reducers/bookReducer";
 
 export const BookContext = createContext();
 
