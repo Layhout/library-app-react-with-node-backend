@@ -15,7 +15,11 @@ const CardsList = () => {
     }, [cards])
 
     const sortCard = (by) => {
-        setCardState(cards.slice().sort((a, b) => (a[by].toLowerCase() < b[by].toLowerCase()) ? -1 : 1));
+        if (by === "ID") {
+            setCardState(cards.slice().sort((a, b) => (a._id - b._id)));
+        } else {
+            setCardState(cards.slice().sort((a, b) => (a[by].toLowerCase() < b[by].toLowerCase()) ? -1 : 1));
+        }
     }
 
     const searchCard = (term) => {

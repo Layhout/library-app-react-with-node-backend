@@ -15,7 +15,11 @@ const Visitors = () => {
     }, [visitors]);
 
     const sortVisitor = (by) => {
-        setVisitorState(visitors.slice().sort((a, b) => (a[by].toLowerCase() < b[by].toLowerCase()) ? -1 : 1));
+        if (by === "ID") {
+            setVisitorState(visitors.slice().sort((a, b) => (a._id - b._id)));
+        } else {
+            setVisitorState(visitors.slice().sort((a, b) => (a[by].toLowerCase() < b[by].toLowerCase()) ? -1 : 1));
+        }
     }
 
     const searchVisitor = (term) => {
