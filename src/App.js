@@ -31,13 +31,13 @@ function App() {
               <CardsList />
             </CardContextProvider>
           </Route>
-          <Route path="/statistics">
-            <Statistics />
-          </Route>
           <Route path="/books/:id">
             <BookContextProvider>
               <BookDetails />
             </BookContextProvider>
+          </Route>
+          <Route path="/statistics">
+            <Statistics />
           </Route>
         </Switch>
       </BrowserRouter>
