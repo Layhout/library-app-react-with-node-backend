@@ -1,14 +1,22 @@
-import { useContext, useEffect, useState } from "react"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import ActionsBar from "../components/ActionsBar"
 import Popup from "../components/Popup"
 import VisitorInfo from "../components/VisitorInfo"
-import { VisitorContext } from "../contexts/VisitorContext"
 import "./styles/VisitorsList.css"
 
 const Visitors = () => {
-    const { visitors } = useContext(VisitorContext);
     const [visitorState, setVisitorState] = useState([]);
     const [btnAddVisitor, setBtnAddVisitor] = useState(false);
+    const visitors = useSelector(state => state.visitors);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        axios.get("http://localhost:1000/visitors").then((res) => {
+            dispatch({ type: "LOAD_VISITOR", data: res.data });
+        }).catch((err) => dispatch({ type: "LOAD_VISITOR", data: { error: err.message } }));
+    }, [dispatch])
 
     useEffect(() => {
         setVisitorState(visitors);
@@ -23,7 +31,12 @@ const Visitors = () => {
     }
 
     const searchVisitor = (term) => {
-        setVisitorState(visitors.filter(v => v.name.includes(term.toLowerCase())));
+        const matchedvisitor = visitors.filter((v) => v.name.toLowerCase().includes(term.toLowerCase()));
+        if (matchedvisitor.length !== 0) {
+            setVisitorState(matchedvisitor);
+        } else {
+            setVisitorState({ error: `No visitor named: "${term}"` });
+        }
     }
 
     return (

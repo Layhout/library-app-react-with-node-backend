@@ -1,12 +1,12 @@
 import "./styles/CardInfo.css";
 import formatedToday from "./formatedToday";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import { CardContext } from "../contexts/CardContext";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const CardInfo = ({ card }) => {
     const [btnReturn, setBtnReturn] = useState(true);
-    const { cardDispatch } = useContext(CardContext);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (card.rDate) {
@@ -20,7 +20,7 @@ const CardInfo = ({ card }) => {
         try {
             await axios.patch("http://localhost:1000/books/return", { id: card.bookId });
             const res = await axios.patch("http://localhost:1000/cards/return", { id: card._id, rDate: formatedToday() });
-            cardDispatch({ type: "UPDATE_ONE_CARD", data: res.data });
+            dispatch({ type: "UPDATE_ONE_CARD", data: res.data });
             setBtnReturn(false);
         } catch (err) {
             alert(err.message);

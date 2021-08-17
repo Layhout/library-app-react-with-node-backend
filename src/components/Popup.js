@@ -1,13 +1,11 @@
 import "./styles/Popup.css"
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Genre from "./Genre";
 import Backdrop from "./Backdrop";
 import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 import formatedToday from "./formatedToday";
-import { BookContext } from "../contexts/BookContext";
-import { VisitorContext } from "../contexts/VisitorContext";
-import { CardContext } from "../contexts/CardContext";
+import { useDispatch, useSelector } from "react-redux";
 
 const NewBookForm = ({ closePopup, edit }) => {
     const [imgUrl, setImgUrl] = useState("https://st3.depositphotos.com/23594922/31822/v/600/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg");
@@ -19,9 +17,9 @@ const NewBookForm = ({ closePopup, edit }) => {
     const publisherRef = useRef();
     const desRef = useRef();
     const copiesRef = useRef();
-    const { bookDispatch } = useContext(BookContext);
     const { id } = useParams();
-    const { books } = useContext(BookContext);
+    const books = useSelector(state => state.books);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (edit) {
@@ -51,7 +49,7 @@ const NewBookForm = ({ closePopup, edit }) => {
                     copies: copiesRef.current.value,
                     borrowed: 0
                 });
-                bookDispatch({ type: "ADD_BOOK", data: res.data })
+                dispatch({ type: "ADD_BOOK", data: res.data })
                 closePopup(prev => !prev);
             } catch (err) {
                 if (err.response.status === 409) {
@@ -74,7 +72,7 @@ const NewBookForm = ({ closePopup, edit }) => {
                     synopsis: desRef.current.value,
                     copies: copiesRef.current.value,
                 });
-                bookDispatch({ type: "UPDATE_ONE_BOOK", data: res.data });
+                dispatch({ type: "UPDATE_ONE_BOOK", data: res.data });
                 closePopup(prev => !prev);
             } catch (err) {
                 if (err.response.status === 400) {
@@ -157,8 +155,9 @@ const NewBookForm = ({ closePopup, edit }) => {
 const DeleteBook = ({ closePopup }) => {
     const history = useHistory();
     const { id } = useParams();
-    const { books, bookDispatch } = useContext(BookContext);
-    const [bTitle, setBTitle] = useState("")
+    const [bTitle, setBTitle] = useState("");
+    const books = useSelector(state => state.books);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const { title } = books.find(b => b._id === id);
@@ -168,7 +167,7 @@ const DeleteBook = ({ closePopup }) => {
     const handleConfirm = async () => {
         try {
             await axios.delete(`http://localhost:1000/books/book/${id}`);
-            bookDispatch({ type: "REMOVE_BOOK", data: id });
+            dispatch({ type: "REMOVE_BOOK", data: id });
             history.push("/");
         } catch (err) {
             if (err.response.status === 404) {
@@ -196,7 +195,7 @@ const NewVisitorForm = ({ closePopup, edit, v2Edit }) => {
     const fname = useRef("");
     const pNum = useRef("");
     const [popupTitle, setPopupTitle] = useState("Add a New Visitor");
-    const { visitorDispatch } = useContext(VisitorContext);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (edit) {
@@ -211,7 +210,7 @@ const NewVisitorForm = ({ closePopup, edit, v2Edit }) => {
         if (!edit) {
             try {
                 const res = await axios.post("http://localhost:1000/visitors/add", { name: fname.current.value, phone: pNum.current.value, borrowRecord: [] });
-                visitorDispatch({ type: "ADD_VISITOR", data: res.data });
+                dispatch({ type: "ADD_VISITOR", data: res.data });
                 closePopup(prev => !prev);
             } catch (err) {
                 if (err.response.status === 409) {
@@ -225,7 +224,7 @@ const NewVisitorForm = ({ closePopup, edit, v2Edit }) => {
         } else {
             try {
                 const res = await axios.patch("http://localhost:1000/visitors/edit", { id: v2Edit._id, name: fname.current.value, phone: pNum.current.value });
-                visitorDispatch({ type: "UPDATE_ONE_VISITOR", data: res.data });
+                dispatch({ type: "UPDATE_ONE_VISITOR", data: res.data });
                 closePopup(prev => !prev);
             } catch (err) {
                 if (err.response.status === 400) {
@@ -261,7 +260,7 @@ const NewCardForm = ({ closePopup }) => {
     const [allBook, setAllBook] = useState([]);
     const [selectedVisitor, setSelectedVisitor] = useState("");
     const [selectedBook, setSelectedBook] = useState("");
-    const { cardDispatch } = useContext(CardContext);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         axios.get("http://localhost:1000/visitors").then((res) => {
@@ -291,7 +290,7 @@ const NewCardForm = ({ closePopup }) => {
             await axios.patch("http://localhost:1000/books/updBorrow", { id: book.id });
             const res = await axios.post("http://localhost:1000/cards/add", { visitorId: visitor.id, visitor: visitor.text, bookId: book.id, book: book.text, bDate: formatedToday(), rDate: "" });
             console.log(res.data);
-            cardDispatch({ type: "ADD_CARD", data: res.data });
+            dispatch({ type: "ADD_CARD", data: res.data });
         } catch (err) {
             alert(err.message);
         }

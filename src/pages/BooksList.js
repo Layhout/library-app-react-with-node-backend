@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import ActionsBar from "../components/ActionsBar"
 import { useSelector, useDispatch } from "react-redux"
+import axios from "axios"
 
 const BookList = () => {
     const books = useSelector(state => state.books);
@@ -14,8 +15,16 @@ const BookList = () => {
     const [btnAddBook, setBtnAddBook] = useState(false);
 
     useEffect(() => {
+        axios.get("http://localhost:1000/books").then((res) => {
+            dispatch({ type: "LOAD_BOOK", data: res.data });
+        }).catch((err) => {
+            dispatch({ type: "LOAD_BOOK", data: { error: err.message } });
+        });
+    }, [dispatch])
+
+    useEffect(() => {
         setBookState(books);
-    }, [])
+    }, [books])
 
     const sortBook = (by) => {
         if (by === "copies") {
@@ -26,7 +35,12 @@ const BookList = () => {
     }
 
     const searchBook = (term) => {
-        setBookState(books.filter((b) => b.title.includes(term.toLowerCase())))
+        const matchedBook = books.filter((b) => b.title.toLowerCase().includes(term.toLowerCase()));
+        if (matchedBook.length !== 0) {
+            setBookState(matchedBook);
+        } else {
+            setBookState({ error: `No book titled: "${term}"` });
+        }
     }
 
     const breakpoints = {

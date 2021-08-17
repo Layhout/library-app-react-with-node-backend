@@ -1,18 +1,26 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ActionsBar from "../components/ActionsBar";
 import "./styles/CardsList.css";
 import CardInfo from "../components/CardInfo";
 import Popup from "../components/Popup";
-import { CardContext } from "../contexts/CardContext";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 const CardsList = () => {
-    const { cards } = useContext(CardContext);
     const [cardState, setCardState] = useState([]);
     const [btnAddCard, setBtnAddCard] = useState(false);
+    const cards = useSelector(state => state.cards);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        axios.get("http://localhost:1000/cards").then((res) => {
+            dispatch({ type: "LOAD_CARD", data: res.data })
+        }).catch((err) => dispatch({ type: "LOAD_CARD", data: { error: err.message } }));
+    }, [dispatch]);
 
     useEffect(() => {
         setCardState(cards);
-    }, [cards])
+    }, [cards]);
 
     const sortCard = (by) => {
         if (by === "ID") {
@@ -23,9 +31,12 @@ const CardsList = () => {
     }
 
     const searchCard = (term) => {
-        setCardState(cards.filter(c =>
-            c.visitor.includes(term.toLowerCase()) || c.book.includes(term.toLowerCase())
-        ));
+        const matchedcards = cards.filter((c) => c.visitor.toLowerCase().includes(term.toLowerCase()));
+        if (matchedcards.length !== 0) {
+            setCardState(matchedcards);
+        } else {
+            setCardState({ error: `No visitor named: "${term}"` });
+        }
     }
 
     return (

@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import "./styles/BookDetails.css"
 import { useParams } from "react-router-dom"
 import Genre from "../components/Genre"
 import Popup from "../components/Popup"
-import { BookContext } from "../contexts/BookContext"
+import { useSelector } from "react-redux"
 
 const BookDetails = () => {
     const { id } = useParams();
@@ -12,7 +12,7 @@ const BookDetails = () => {
     const [btnDelete, setBtnDelete] = useState(false);
     const [btnEdit, setBtnEdit] = useState(false);
     const [isError, setIsError] = useState("");
-    const { books } = useContext(BookContext);
+    const books = useSelector(state => state.books)
 
     useEffect(() => {
         const foundBook = books.find(b => b._id === id);
