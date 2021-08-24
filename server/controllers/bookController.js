@@ -65,7 +65,7 @@ export const editBook = async (req, res) => {
             res.status(200).json(editedBook);
             return;
         }
-        res.status(400).json({ msg: "Edit fail. Something's wrong" });
+        res.status(400).json({ error: "Edit fail. Something's wrong" });
     } catch (err) {
         console.log("Server fail:", err.message);
         res.status(500).json({ error: err.message });
