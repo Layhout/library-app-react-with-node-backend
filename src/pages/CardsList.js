@@ -24,9 +24,9 @@ const CardsList = () => {
 
     const sortCard = (by) => {
         if (by === "ID") {
-            setCardState(cards.slice().sort((a, b) => (a._id - b._id)));
+            setCardState(prev => prev.slice().sort((a, b) => (a._id - b._id)));
         } else {
-            setCardState(cards.slice().sort((a, b) => (a[by].toLowerCase() < b[by].toLowerCase()) ? -1 : 1));
+            setCardState(prev => prev.slice().sort((a, b) => (a[by].toLowerCase() < b[by].toLowerCase()) ? -1 : 1));
         }
     }
 

@@ -12,12 +12,12 @@ export const allVisitors = async (req, res) => {
 
 export const addVisitor = async (req, res) => {
     try {
-        const addedVisitor = await Visitor.create(req.body);
+        const addedVisitor = await Visitor.create({...req.body, borrow: 0});
         res.status(201).json(addedVisitor);
     } catch (err) {
         if (err.code === 11000) { // 11000 is a code for duplication error
             res.status(409).json({ error: `Visitor ${err.keyValue.name} is already in the database. Please use edit option.` });
-        } else {   
+        } else {
             console.log("Server fail:", err.message);
             res.status(500).json({ error: err.message });
         }
@@ -40,8 +40,7 @@ export const editVisitor = async (req, res) => {
 
 export const updBorrowRecord = async (req, res) => {
     try {
-        const foundV = await Visitor.findById(req.body.id);
-        await Visitor.findByIdAndUpdate(req.body.id, { borrowRecord: foundV.borrowRecord.concat(req.body.borrowedBook), borrow: ++foundV.borrow }, { useFindAndModify: false });
+        await Visitor.findByIdAndUpdate(req.body.id, { $push: {borrowRecord: req.body.borrowedBook}, $inc: {borrow: 1} }, { useFindAndModify: false });
         res.status(200).json(null)
     } catch (err) {
         console.log("server fail:", err.message);

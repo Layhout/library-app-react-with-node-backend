@@ -60,7 +60,7 @@ export const addBook = async (req, res) => {
 export const editBook = async (req, res) => {
     const id = req.params.id
     try {
-        const editedBook = await Book.findByIdAndUpdate(id, { ...req.body }, { useFindAndModify: false, new: true });
+        const editedBook = await Book.findByIdAndUpdate(id, req.body, { useFindAndModify: false, new: true });
         if (editedBook) {
             res.status(200).json(editedBook);
             return;
@@ -74,8 +74,7 @@ export const editBook = async (req, res) => {
 
 export const updBorrow = async (req, res) => {
     try {
-        const foundB = await Book.findById(req.body.id);
-        await Book.findByIdAndUpdate(req.body.id, { borrowed: ++foundB.borrowed, copies: --foundB.copies }, { useFindAndModify: false });
+        await Book.findByIdAndUpdate(req.body.id, { $inc: { borrowed: 1, copies: -1 } }, { useFindAndModify: false }); // $inc stands for increase
         res.status(200).json(null);
     } catch (err) {
         console.log("Server fail:", err.message);
@@ -85,8 +84,7 @@ export const updBorrow = async (req, res) => {
 
 export const returnBook = async (req, res) => {
     try {
-        const returnedB = await Book.findById(req.body.id);
-        await Book.findByIdAndUpdate(req.body.id, { copies: ++returnedB.copies }, { useFindAndModify: false });
+        await Book.findByIdAndUpdate(req.body.id, {$inc: { copies: 1 }}, { useFindAndModify: false });
         res.status(200).json(null);
     } catch (err) {
         console.log("Server fail:", err.message);

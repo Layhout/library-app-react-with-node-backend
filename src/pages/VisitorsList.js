@@ -24,9 +24,9 @@ const Visitors = () => {
 
     const sortVisitor = (by) => {
         if (by === "ID") {
-            setVisitorState(visitors.slice().sort((a, b) => (a._id - b._id)));
+            setVisitorState(prev => prev.slice().sort((a, b) => (a._id - b._id)));
         } else {
-            setVisitorState(visitors.slice().sort((a, b) => (a[by].toLowerCase() < b[by].toLowerCase()) ? -1 : 1));
+            setVisitorState(prev => prev.slice().sort((a, b) => (a[by].toLowerCase() < b[by].toLowerCase()) ? -1 : 1));
         }
     }
 
