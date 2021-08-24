@@ -23,7 +23,7 @@ const CardInfo = ({ card }) => {
             dispatch({ type: "UPDATE_ONE_CARD", data: res.data });
             setBtnReturn(false);
         } catch (err) {
-            alert(err.message);
+            alert(err.response.data.error);
         }
     }
 

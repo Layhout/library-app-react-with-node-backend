@@ -9,7 +9,7 @@ const TopBooks = () => {
         axios.get("http://localhost:1000/books/top5").then((res) => {
             setTop5B(res.data)
         }).catch((err) => {
-            setTop5B({ error: err.message });
+            setTop5B({ error: err.response.data.error });
         });
     }, [])
 

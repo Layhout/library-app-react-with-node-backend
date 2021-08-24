@@ -15,7 +15,7 @@ const Visitors = () => {
     useEffect(() => {
         axios.get("http://localhost:1000/visitors").then((res) => {
             dispatch({ type: "LOAD_VISITOR", data: res.data });
-        }).catch((err) => dispatch({ type: "LOAD_VISITOR", data: { error: err.message } }));
+        }).catch((err) => dispatch({ type: "LOAD_VISITOR", data: { error: err.response.data.error } }));
     }, [dispatch])
 
     useEffect(() => {

@@ -15,7 +15,7 @@ const CardsList = () => {
     useEffect(() => {
         axios.get("http://localhost:1000/cards").then((res) => {
             dispatch({ type: "LOAD_CARD", data: res.data })
-        }).catch((err) => dispatch({ type: "LOAD_CARD", data: { error: err.message } }));
+        }).catch((err) => dispatch({ type: "LOAD_CARD", data: { error: err.response.data.error } }));
     }, [dispatch]);
 
     useEffect(() => {

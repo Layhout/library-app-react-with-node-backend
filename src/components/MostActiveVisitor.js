@@ -9,7 +9,7 @@ const MostActiveVisitor = () => {
         axios.get("http://localhost:1000/visitors/top5").then((res) => {
             setTop5V(res.data);
         }).catch((err) => {
-            setTop5V({ error: err.message });
+            setTop5V({ error: err.response.data.error });
         })
     }, [])
 

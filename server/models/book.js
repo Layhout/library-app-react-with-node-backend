@@ -4,18 +4,23 @@ const bookSchema = mongoose.Schema({
     title: {
         type: String,
         required: true,
+        trim: true,
+        unique: true,
     },
     img: {
         type: String,
         required: true,
+        trim: true,
     },
     author: {
         type: String,
         required: true,
+        trim: true,
     },
     publisher: {
         type: String,
         required: true,
+        trim: true,
     },
     genres: {
         type: Array,

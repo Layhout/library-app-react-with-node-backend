@@ -6,24 +6,21 @@ export const allVisitors = async (req, res) => {
         res.status(200).json(visitors);
     } catch (err) {
         console.log("Fetch visitors fail:", err.message);
-        res.status(500).json({ errMsg: err.message });
+        res.status(500).json({ error: err.message });
     }
 }
 
 export const addVisitor = async (req, res) => {
     try {
-        const allV = await Visitor.find();
-        const foundV = allV.find(v => v.name.toLowerCase() === req.body.name.trim().toLowerCase())
-        if (foundV) {
-            res.status(409).json({ msg: "visitor already exists" });
-            return;
-        }
-        const newVisitor = new Visitor({ ...req.body, name: req.body.name.trim(), borrow: 0 });
-        const addedVisitor = await newVisitor.save();
+        const addedVisitor = await Visitor.create(req.body);
         res.status(201).json(addedVisitor);
     } catch (err) {
-        console.log("server fail:", err.message);
-        res.status(500).json({ errMsg: err.message });
+        if (err.code === 11000) { // 11000 is a code for duplication error
+            res.status(409).json({ error: `Visitor ${err.keyValue.name} is already in the database. Please use edit option.` });
+        } else {   
+            console.log("Server fail:", err.message);
+            res.status(500).json({ error: err.message });
+        }
     }
 }
 
@@ -37,7 +34,7 @@ export const editVisitor = async (req, res) => {
         res.status(400).json(null);
     } catch (err) {
         console.log("server fail:", err.message);
-        res.status(500).json({ errMsg: err.message });
+        res.status(500).json({ error: err.message });
     }
 }
 
@@ -48,7 +45,7 @@ export const updBorrowRecord = async (req, res) => {
         res.status(200).json(null)
     } catch (err) {
         console.log("server fail:", err.message);
-        res.status(500).json({ errMsg: err.message });
+        res.status(500).json({ error: err.message });
     }
 }
 
@@ -58,6 +55,6 @@ export const top5Visitors = async (req, res) => {
         res.status(200).json(t5V);
     } catch (err) {
         console.log("Server fail:", err.message);
-        res.status(500).json({ errMsg: err.message });
+        res.status(500).json({ error: err.message });
     }
 }

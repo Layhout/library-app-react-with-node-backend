@@ -53,7 +53,7 @@ const NewBookForm = ({ closePopup, edit }) => {
                 closePopup(prev => !prev);
             } catch (err) {
                 if (err.response.status === 409) {
-                    alert(`Add book fail. ${titleRef.current.value} already exists in DataBase. Please edit it instead.`);
+                    alert(err.response.data.error);
                     closePopup(prev => !prev);
                 } else {
                     alert("Server failure " + err.message);
@@ -79,7 +79,7 @@ const NewBookForm = ({ closePopup, edit }) => {
                     alert("Edit fail. Something's wrong and it not the server.");
                     closePopup(prev => !prev);
                 } else {
-                    alert(err.message);
+                    alert(err.response.data.error);
                     closePopup(prev => !prev);
                 }
             }
@@ -167,14 +167,14 @@ const DeleteBook = ({ closePopup }) => {
     const handleConfirm = async () => {
         try {
             await axios.delete(`http://localhost:1000/books/book/${id}`);
-            dispatch({ type: "REMOVE_BOOK", data: id });
             history.push("/");
+            dispatch({ type: "REMOVE_BOOK", data: id });
         } catch (err) {
             if (err.response.status === 404) {
                 alert("This book dosen't exist to be deleted");
                 history.push("/");
             } else {
-                alert(err.message);
+                alert(err.response.data.error);
                 history.push("/");
             }
         }
@@ -214,7 +214,7 @@ const NewVisitorForm = ({ closePopup, edit, v2Edit }) => {
                 closePopup(prev => !prev);
             } catch (err) {
                 if (err.response.status === 409) {
-                    alert(`Add visitor fail. ${fname.current.value} already exists in DataBase.`);
+                    alert(err.response.data.error);
                     closePopup(prev => !prev);
                 } else {
                     alert("Server failure " + err.message);
@@ -231,7 +231,7 @@ const NewVisitorForm = ({ closePopup, edit, v2Edit }) => {
                     alert("Update fail.")
                     closePopup(prev => !prev);
                 } else {
-                    alert(err.message);
+                    alert(err.response.data.error);
                     closePopup(prev => !prev);
                 }
             }
@@ -266,12 +266,12 @@ const NewCardForm = ({ closePopup }) => {
         axios.get("http://localhost:1000/visitors").then((res) => {
             setAllVisitor(res.data);
         }).catch((err) => {
-            alert(err.message);
+            alert(err.response.data.error);
         })
         axios.get("http://localhost:1000/books").then((res) => {
             setAllBook(res.data.filter(rd => rd.copies > 0));
         }).catch((err) => {
-            alert(err.message);
+            alert(err.response.data.error);
         })
     }, [])
 
@@ -292,7 +292,7 @@ const NewCardForm = ({ closePopup }) => {
             console.log(res.data);
             dispatch({ type: "ADD_CARD", data: res.data });
         } catch (err) {
-            alert(err.message);
+            alert(err.response.data.error);
         }
         closePopup(prev => !prev)
     }

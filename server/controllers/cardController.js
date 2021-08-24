@@ -6,18 +6,17 @@ export const allCards = async (req, res) => {
         res.status(200).json(cards);
     } catch (err) {
         console.log("Fetch cards fail:", err.message);
-        res.status(500).json(null);
+        res.status(500).json({error: err.message});
     }
 }
 
 export const addCard = async (req, res) => {
     try {
-        const newCard = new Card(req.body);
-        const addedCard = await newCard.save();
+        const addedCard = await Card.create(req.body);
         res.status(200).json(addedCard);
     } catch (err) {
         console.log("Sevrer failure:", err.message);
-        res.status(500).json(null);
+        res.status(500).json({error: err.message});
     }
 }
 
@@ -27,6 +26,6 @@ export const returnCard = async (req, res) => {
         res.status(200).json(updC);
     } catch (err) {
         console.log("Sevrer failure:", err.message);
-        res.status(500).json(null);
+        res.status(500).json({error: err.message});
     }
 }

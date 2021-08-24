@@ -6,7 +6,7 @@ export const allBooks = async (req, res) => {
         res.status(200).json(books)
     } catch (err) {
         console.log("Fetch all book fail:", err.message);
-        res.status(500).json({ errMsg: err.message });
+        res.status(500).json({ error: err.message });
     }
 }
 
@@ -23,7 +23,7 @@ export const getOneBook = async (req, res) => {
         res.status(404).json(null);
     } catch (err) {
         console.log("Server fail:", err.message);
-        res.status(500).json({ errMsg: err.message });
+        res.status(500).json({ error: err.message });
     }
 }
 
@@ -39,31 +39,28 @@ export const deleteOneBook = async (req, res) => {
         res.status(404).json(null);
     } catch (err) {
         console.log("Server fail:", err.message);
-        res.status(500).json({ errMsg: err.message });
+        res.status(500).json({ error: err.message });
     }
 }
 
 export const addBook = async (req, res) => {
     try {
-        const allBook = await Book.find();
-        const foundBook = allBook.find(book => book.title.toLowerCase() === req.body.title.trim().toLowerCase());
-        if (foundBook) {
-            res.status(409).json({ msg: "Book already exists" });
-            return;
-        }
-        const newBook = new Book({ ...req.body, title: req.body.title.trim(), img: req.body.img.trim(), author: req.body.author.trim(), publisher: req.body.publisher.trim() });
-        const addedBook = await newBook.save();
+        const addedBook = await Book.create(req.body);
         res.status(201).json(addedBook);
     } catch (err) {
-        console.log("Server fail:", err.message);
-        res.status(500).json({ errMsg: err.message });
+        if (err.code === 11000) { // 11000 is a code for duplication error
+            res.status(409).json({error: `Book ${err.keyValue.title} is already in the database. Please use edit option.`})
+        } else {   
+            console.log("Server fail:", err.message);
+            res.status(500).json({ error: err.message });
+        }
     }
 }
 
 export const editBook = async (req, res) => {
     const id = req.params.id
     try {
-        const editedBook = await Book.findByIdAndUpdate(id, { ...req.body, title: req.body.title.trim(), img: req.body.img.trim(), author: req.body.author.trim(), publisher: req.body.publisher.trim() }, { useFindAndModify: false, new: true });
+        const editedBook = await Book.findByIdAndUpdate(id, { ...req.body }, { useFindAndModify: false, new: true });
         if (editedBook) {
             res.status(200).json(editedBook);
             return;
@@ -71,7 +68,7 @@ export const editBook = async (req, res) => {
         res.status(400).json({ msg: "Edit fail. Something's wrong" });
     } catch (err) {
         console.log("Server fail:", err.message);
-        res.status(500).json({ errMsg: err.message });
+        res.status(500).json({ error: err.message });
     }
 }
 
@@ -82,7 +79,7 @@ export const updBorrow = async (req, res) => {
         res.status(200).json(null);
     } catch (err) {
         console.log("Server fail:", err.message);
-        res.status(500).json({ errMsg: err.message });
+        res.status(500).json({ error: err.message });
     }
 }
 
@@ -93,7 +90,7 @@ export const returnBook = async (req, res) => {
         res.status(200).json(null);
     } catch (err) {
         console.log("Server fail:", err.message);
-        res.status(500).json({ errMsg: err.message });
+        res.status(500).json({ error: err.message });
     }
 }
 
@@ -103,6 +100,6 @@ export const top5Books = async (req, res) => {
         res.status(200).json(t5B);
     } catch (err) {
         console.log("Server fail:", err.message);
-        res.status(500).json({ errMsg: err.message });
+        res.status(500).json({ error: err.message });
     }
 }

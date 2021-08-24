@@ -18,7 +18,7 @@ const BookList = () => {
         axios.get("http://localhost:1000/books").then((res) => {
             dispatch({ type: "LOAD_BOOK", data: res.data });
         }).catch((err) => {
-            dispatch({ type: "LOAD_BOOK", data: { error: err.message } });
+            dispatch({ type: "LOAD_BOOK", data: { error: err.response.data.error } });
         });
     }, [dispatch])
 

@@ -4,10 +4,13 @@ const visitorSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
+        trim: true,
+        unique: true,
     },
     phone: {
         type: String,
         required: true,
+        trim: true,
     },
     borrowRecord: {
         type: Array,

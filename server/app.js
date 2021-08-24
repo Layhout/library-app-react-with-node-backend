@@ -11,9 +11,12 @@ import cardRouters from "./routes/cardRouters.js";
 const app = express();
 
 // connect to db and listening
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(() => {
         console.log("Connect to DB!");
+        app.listen(1000, () => {
+            console.log("listen on port 1000");
+        });
     })
     .catch((err) => console.log(err));
 
@@ -27,7 +30,3 @@ app.use(morgan("dev"));
 app.use("/books", bookRoutes);
 app.use("/visitors", visitorRouters);
 app.use("/cards", cardRouters);
-
-app.listen(1000, () => {
-    console.log("listen on port 1000");
-});
